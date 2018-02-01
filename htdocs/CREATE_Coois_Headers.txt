@@ -1,0 +1,21 @@
+CREATE TABLE public."Coois_Headers"
+(
+"Order" text NOT NULL ,
+ "Material" text  ,
+ "MRP ctrlr" text  ,
+ "Order Type" text  ,
+ "Target qty" integer  ,
+ "Unit" text  ,
+ "Bsc start" timestamp without time zone  ,
+ "Basic fin." timestamp without time zone  ,
+ "Material description" text  ,
+ "System Status" text  ,
+ "Firming" text  ,
+ "Plant" text  ,
+ "Pull_Date" timestamp without time zone
+ )
+ WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public."Coois_Headers"
+  OWNER TO postgres;

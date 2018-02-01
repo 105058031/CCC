@@ -1,0 +1,8 @@
+{
+    "ADMIN_EMAIL": "dan@mikusa.com",
+    "WEB_SERVER": "nginx",
+    "PHP_VERSION": "{PHP_56_LATEST}",
+    "PHP_EXTENSIONS": ["pdo", "pdo_pgsql", "pgsql"],
+    "ZEND_EXTENSIONS": ["xdebug"],
+    "ADDITIONAL_PREPROCESS_CMDS": ["php junk.php"]
+}

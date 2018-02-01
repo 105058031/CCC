@@ -1,0 +1,23 @@
+{
+  "name": "cf-ex-php-info",
+  "homepage": "//none",
+  "description": "local Farnborough Digital CCC under development",
+  "main": "index.html",
+  "keywords": [
+    "//none"
+  ],
+  "authors": [
+    "Gabor Dubniczki",
+    "Luis Enrique Lopez Ruiz",
+    "Jonathan Richardson"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

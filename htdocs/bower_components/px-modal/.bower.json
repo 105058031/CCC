@@ -1,0 +1,45 @@
+{
+  "name": "px-modal",
+  "version": "2.0.3",
+  "main": [
+    "px-modal.html"
+  ],
+  "ignore": [
+    "*.enc",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "sass",
+    "*.md",
+    "scripts",
+    ".github",
+    "gulpfile.js",
+    "wct.conf.json",
+    "test",
+    "OSS_Notice.pdf",
+    "*.png",
+    "npm-debug.log"
+  ],
+  "dependencies": {
+    "polymer": "^1.9.0"
+  },
+  "devDependencies": {
+    "px-theme": "^3.0.0",
+    "px-starter-kit-design": "^1.0.0",
+    "px-demo": "^2.0.0"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^0.7.24"
+  },
+  "homepage": "https://github.com/PredixDev/px-modal",
+  "_release": "2.0.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.0.3",
+    "commit": "2323070178055402578d18408740e098ea4cabd9"
+  },
+  "_source": "https://github.com/PredixDev/px-modal.git",
+  "_target": "^2.0.3",
+  "_originalSource": "px-modal",
+  "_direct": true
+}

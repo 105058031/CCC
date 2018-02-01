@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" style="overflow-y: visible;">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>CCC Despatch List</title>
+
+<audio id="Clicko" src="../dist/CLICK15A.mp3" ></audio>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="/../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link href="/../../bower_components/polymer/polymer.html" rel="import">
+<link href="https://polygit.org/px-*+PredixDev+*/webcomponentsjs+v0.7.24/polymer+v1.9.1/components/px-theme/px-theme-styles.html" rel="import">
+<style include="https://polygit.org/px-*+PredixDev+*/webcomponentsjs+v0.7.24/polymer+v1.9.1/components/px-theme-styles" is="custom-style"></style>
+<link href="/../../bower_components/px-modal/px-modal.html" rel="import">
+
+
+<link rel="icon" href="../../../dist/components/brandkit/favicon/favicon.ico">
+<link href="../../../CSS/core-design.css" rel="stylesheet" type="text/css">
+<link href="../../../dist/css/iids1.css" rel="stylesheet" type="text/css">
+<link href="../../../dist/css/responsive.css" rel="stylesheet" type="text/css">
+<script src="/../scripts/d3.v4.js" type = "text/javascript"></script>
+<script src="/scripts/jquery-3.1.0.min.js" type = "text/javascript"></script>
+ <!--   <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../dist/css/justified-nav.css" rel="stylesheet">-->
+<script src="/../../dist/js/bootstrap.min.js" type = "text/javascript"></script>
+<!--<script src="/../../dist/js/dataTables.buttons.min.js" type = "text/javascript"></script>-->
+<script src="/../../dist/js/jquery.dataTables.min.js" type = "text/javascript"></script>
+<script src="/../../dist/js/dataTables.select.min.js" type = "text/javascript"></script>
+<!--<script src="/../../dist/js/dataTables.editor.min.js" type = "text/javascript"></script>-->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../dist/assets/ie10-viewport-bug-workaround.css" rel="stylesheet">
+	<link rel="import" href="../hard_styles.html">
+	
+<!--<script type="text/javascript" charset="utf8" src="/../../../js/dataTables.min.js"></script>-->
+<script type="text/javascript" charset="utf8" src="/../../../js/datatables.js"></script>
+<script type = "text/javascript">
+function DRAF(C,T) 
+{
+var audio = document.getElementById("Clicko");
+       audio.play();
+var Params = pass_Params();
+if (Params[0] == 'undefined' )
+{
+Params[0] = getCookie('plant');
+Params[1] = getCookie('cell');
+}
+if (Params[1] != 'undefined')
+{
+$.ajax({
+	url: 'Write_1_1.php?argument1=' + Params[1] + '&argument2=' + C + '&argument3=' + T + '&argument4=' + Params[0],
+	type: 'POST',
+	success: function (){console.log('That was cool! Check the DB!')}
+});
+
+
+
+}
+
+}
+
+</script>
+
+</head>
+
+<body bgcolor="#000000" style ="overflow:visible; ">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<nav class="navbar navbar-static-top navbar-default" role="navigation">
+<div class="container">
+<div class="navbar-header">
+      <a class="navbar-brand" href="../../index.html"><span class="ge-logo"></span> <span>CCC Dashboard<small><i> on </i> Predix </small></span></a>
+      <!-- .navbar-toggle for collapsed navbar content -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+</div>
+<div class="pull-right">
+<div class="btn-toolbar pull-left">
+
+<div class="btn-group">
+          <button id="Tier_Button1" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown"><span id="Tier1"class="user-name">Choose Tier 1</span> <i class="icon-chevron-down"></i></button>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="?plant=6400">Farnborough</a></li>
+            <li><a href="?plant=1400">Lafayette</a></li>
+            <li><a href="?plant=1401">Conroe</a></li>
+          </ul>
+</div>
+<div class="btn-group">		
+
+<button id="Tier_Button2" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown"><span id="Tier2" class="user-name">Choose Tier 2</span> <i class="icon-chevron-down"></i></button>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="#">Choose Tier 1 first</a></li>
+          </ul>
+</div>
+
+</div>
+</div>
+</div>
+<div  style="background-color: dark-grey; width: 100%" class="primary-navbar nav-collapse">
+    <div class="container">
+		
+		<div class="responsive-elements">
+		
+		</div>
+      <ul class="nav navbar-nav">
+        <li><a href="/index.html">Home</a></li>
+
+        <li><a href="/CCC_Ind_SAF_2_7.html">Safety X</a></li>
+        <li><a href="/CCC_Ind_QUA_1_6.html">Quality</a></li>
+		<li><a href="/CCC_Ind_DEL_1_7.html">Delivery</a></li>
+		<li><a href="/CCC_Ind_IMP_1_6.html">Projects</a></li>
+		<li><a href="/CCC_Ind_CAP_3_0.html">Capacity</a></li>
+		<li class="active"><a href="">Despatch List</a></li>
+
+
+      </ul>
+
+	</div>
+</div>
+</nav>
+ <script>
+    var link = document.querySelector('link[rel=import]');
+    var content = link.import.querySelector('#st');
+    document.body.appendChild(document.importNode(content, true));
+ </script>
+<div class="container content">
+<div class="row ui-sortable" style="height: 10%;">
+
+<div class="col-sm-12 col-md-12">
+<section class="module actionable draggable" style="background: transparent; height: 10%">
+<header class="module-header" >
+          <h2 class="voice voice-brand pull-left" id="TITL">Cell Despatch List</h2>
+</header>
+
+
+
+</section>
+</div>
+</div>
+<script src="/js/highcharts.js"></script>
+<script src="/js/modules/exporting.js" ></script>
+<script type="text/javascript" charset="utf8" src="/../../../js/datatables.js"></script>
+<px-modal
+	btn-modal-negative="Close" id="pxm">
+<button
+	class='btn btn--primary modal-trigger' id='bitBut' disabled>
+</button>
+	<p>
+		<h2 class ="PopHead"> Head </h2>
+		<table class="table" id="Det" style= "margin:1% 0 0 0" bgcolor="#00FF00">
+		<thead>
+			<tr>
+				<th> Work Ctr </th>
+				<th> Op </th>
+				<th> Operation Description </th>
+				<th> Stat </th>
+				<th> MRPC </th>
+				<th> Qty </th>
+				<th> Hrs </th>
+				<th> Op/Act Finish </th>
+				<th> WOrder Finish </th>
+			</tr>
+		</thead>
+		</table>
+		<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.-->
+	</p>
+</px-modal>
+ <div class="row ui-sortable">
+ <div class="col-sm-12 col-md-12" style="">
+ <section class="module actionable draggable" style="background: transparent;">
+<table id="zis_Tab" class="table" style= "margin:1% 0 0 0" bgcolor="#00FF00">
+
+	<thead>
+		<tr>
+			<th> Work Ctr </th>
+			<th> WO </th>
+			<th> Op </th>
+			<th> MRPC </th>
+			<th> Part </th>
+			<th> Description </th>
+			<th> Qty </th>
+			<th> Hrs </th>
+			<th> Op Finish </th>
+			<th> WO Finish </th>
+			<th style="display:none;">Mat Descript</th>
+			<!--th> Nr of competent operators</th-->
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+		
+			<!--td contenteditable='true'> 1 Data 1 </td>
+			<td> 1 Data 2 </td>
+			<td> 1 Data 3 </td>
+			<td> 1 Data 4 </td>
+			<td> 1 Data 5 </td-->
+		</tr>
+
+	</tbody>
+</table>
+</section>
+</div>
+</div>
+
+<script src="../../dist/components/bootstrap/js/collapse.js"></script>
+
+<script type="text/javascript">
+
+function find_Params()
+		{
+
+		var parameters = location.search.substring(1).split("&");
+		var temp;
+		var Tier= [0];
+		var gh;
+for (i=0;i<parameters.length;i++)
+			{
+		temp = parameters[i].split("=");
+		Tier[i] = unescape(temp[1]);
+
+
+		console.log(Tier[i]);
+			}
+	if (Tier[0]>0)
+	{
+	if (document.getElementById('Tier1').innerHTML !="Plant "+Tier[0])
+		{
+	document.getElementById('Tier1').innerHTML = "Plant "+Tier[0];
+	$.ajax({
+			type: 'GET',
+            url: 'Cells_1_0_Arg.php?argument1=' + Tier[0],
+			dataType: 'json',
+            cache: false,
+            success: function (result) 
+				{
+				document.getElementById('Tier2').innerHTML = "Choose the Cell";
+				console.log(document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML);
+				document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML = '';
+				$.each(result, function (i, item) {
+				console.log('WC'+result[i].Cell.substring(0,result[i].Cell.toString().indexOf(' ')));
+				document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML = document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML +
+				'<li><a href="?plant=' +Tier[0]+'&WC='+result[i].Cell+'">'+result[i].Cell +' Cell</a></li>';
+													});
+					if (Tier[1]!=undefined)
+					{
+					document.getElementById('Tier2').innerHTML = "WC "+Tier[1];
+					}
+				}
+	
+			});
+		}
+	else
+		{
+		if (Tier[1]!=undefined)
+			{
+			document.getElementById('Tier2').innerHTML = "WC "+Tier[1];
+			}
+		}
+	}
+	
+		}	
+find_Params();
+</script>
+<script type="text/javascript">
+function pass_Params()
+{
+var parameters = location.search.substring(1).split("&");
+		var temp;
+		var Tier= [0];
+		var gh;
+for (i=0;i<parameters.length;i++)
+			{
+		temp = parameters[i].split("=");
+		Tier[i] = unescape(temp[1]);
+			}
+return Tier;
+}
+
+</script>
+<script type="text/javascript">
+function getCookie(cname) {
+	var end;
+    var name = cname + "=";
+	var ca = document.cookie.split(';expires');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1);
+        }
+		if (c.indexOf('&') > c.indexOf(cname))
+		{
+		end = c.indexOf('&');
+		}
+		else
+		{
+		temp = c.length;
+		temp2 =  c.indexOf(';',c.indexOf(cname));
+		end = Math.max(temp,temp2);
+		}
+		         return c.substring(c.indexOf(name)+name.length,end);
+        
+    }
+    return "";
+	
+}
+
+function find_cookie_Params()
+		{
+
+		var parameters = [getCookie('plant'),getCookie('cell')];
+		var temp;
+		var Tier= [0];
+		var gh;
+		if (parameters[1]!=undefined) 
+				{
+for (i=0;i<parameters.length;i++)
+			{
+		Tier[i] = parameters[i];
+		console.log(Tier[i]);
+			}
+	if (Tier[0]>0)
+	{
+	if (document.getElementById('Tier1').innerHTML !="Plant "+Tier[0])
+		{
+	document.getElementById('Tier1').innerHTML = "Plant "+Tier[0];
+	$.ajax({
+			type: 'GET',
+            url: 'Cells_1_0_Arg.php?argument1=' + Tier[0],
+			dataType: 'json',
+            cache: false,
+            success: function (result) 
+				{
+				document.getElementById('Tier2').innerHTML = "Choose the Cell";
+				console.log(document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML);
+				document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML = '';
+				$.each(result, function (i, item) {
+				console.log(result[i].Cell.substring(0,result[i].Cell.toString().indexOf(' ')));
+				document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML = document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML +
+				'<li><a href="?plant=' +Tier[0]+'&WC='+result[i].Cell+'">'+result[i].Cell+' Cell</a></li>';
+													});
+					if (Tier[1]!=undefined)
+					{
+					document.getElementById('Tier2').innerHTML = "WC "+Tier[1];
+					}
+				}
+	
+			});
+		}
+	else
+		{
+		if (Tier[1]!=undefined)
+			{
+			document.getElementById('Tier2').innerHTML = "WC "+ Tier[1];
+			}
+		}
+	}
+	
+				}	
+		}
+
+</script>
+<script type="text/javascript" language="javascript">
+
+var Params = pass_Params();
+if (Params[0] == 'undefined' )
+{
+Params[0] = getCookie('plant');
+Params[1] = getCookie('cell');
+find_cookie_Params();
+}
+if (Params[0] == 'undefined')
+{
+Params[0]='-';
+Params[1]='-';
+}
+
+var WC = Params[1];
+var Plant = Params[0];
+
+var value;
+
+function Date_Pop(r, c, va) 
+{
+var element = $('#zis_Tab tr').eq(r).find('td').eq(c) 
+element[0].innerHTML = va + element[0].innerHTML;
+}
+var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+
+$(document).ready(function(){
+var stat;
+var pstat;
+var ext_str;
+var td_str;
+$.ajax({
+            type: 'GET',
+			url: 'Pull_PG2_COOP_px2.php?argument1='+WC+'&argument2='+ Plant,
+            //url: 'CM_ZO_1_1_Arg.php?argument1='+WC+'&argument2='+ Plant,
+			dataType: 'json',
+            cache: false,
+            success: function (response) {
+            var dico = '';
+			var orde = '';
+        var trHTML = '';   
+        $.each(response, function (i, item) {
+		if (item.ord != orde && i!=0) 
+		{
+		ext_str = 'style="border-top: 2px solid #888;"><td style="color: #e1e1e1;">_______</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr style="border-top: 2px solid #888;"'; 
+		}
+		else
+		{
+		ext_str = '';
+		}
+		var dat1 = new Date(item.LatestFinish);
+			
+			if (isNaN(dat1)) 
+			{
+			dat1 = new Date(item.LatestFinish.replace(" ","T")+"Z");
+			dat1.setHours(dat1.getHours() - 1);
+			}
+		
+		
+		var dat2 = new Date();
+		stat = item.Stat;
+		if(item.PrevStat != null)
+		{
+		pstat = item.PrevStat;
+		}
+		else
+		{
+		pstat = '';
+		}
+		
+arr = item.LatestFinish.toString().split('-')
+var dat3  = new Date(Number(arr[0]),Number(arr[1])-1,Number(arr[2].substring(0, 2)));
+		 if( dat3.getDate().toString().length > 1)
+		 {var day = dat3.getDate();}
+		 else
+		 {var day = '0'+ dat3.getDate();}
+		 
+		 var Mnum = dat3.getMonth()+1
+		 
+		 if( Mnum.toString().length > 1)
+		 {var mon = Mnum.toString();}
+		 else
+		 {var mon = '0'+ Mnum.toString();}
+		 
+		 var sho = day+'-'+mon+'-'+dat3.getFullYear();
+
+arr = item.OrderFinish.toString().split('-')
+var dat4  = new Date(Number(arr[0]),Number(arr[1])-1,Number(arr[2].substring(0, 2)));
+		 if( dat4.getDate().toString().length > 1)
+		 {var day = dat4.getDate();}
+		 else
+		 {var day = '0'+ dat4.getDate();}
+		 
+		 var Mnum = dat4.getMonth()+1
+		 
+		 if( Mnum.toString().length > 1)
+		 {var mon = Mnum.toString();}
+		 else
+		 {var mon = '0'+ Mnum.toString();}
+		 
+		 var sho2 = day+'-'+mon+'-'+dat4.getFullYear();
+		 
+		if(dat1.setHours(0,0,0,0) < dat2.setHours(0,0,0,0))
+		{
+		td_str = ' bgcolor="#D9A3A3" ';
+		}
+		else
+		{
+		td_str = '';
+		}
+            
+			if (stat=='PCNF' )
+			{
+			trHTML += 
+			'<tr' + ext_str +'><td contenteditable="false">' + item.WorkCenter +
+			'</td><td contenteditable="false">' + item.Order +
+			'</td><td contenteditable="false">' + item.Operation + 
+			'</td><td contenteditable="false">' + item.MRPController + 
+			'</td><td contenteditable="false">'+ item.Material +
+			'</td><td contenteditable="false">'+ item.OpDescription +
+			'</td><td contenteditable="false">'+ item.Qty +	
+			'</td><td contenteditable="false">'+ item.ProcessTime +
+			'</td><td ' + td_str + 'contenteditable="false">'+ sho+
+			//'</td><td contenteditable="false">' + item.LatestFinish + 			
+			//'</td><td contenteditable="false">'+ item.OrderFinish +
+			'</td><td ' + td_str + 'contenteditable="false"><span style="font-family: GE Inspira;" class="ge-badge -size--standard -fill--solid -corner--round -position--top -color--blue">PCNF</span>'+ sho2 +
+			'</td><td contenteditable="false" style="display:none;">' + item.Mat_des + 
+			//'</td><td ' + td_str + 'contenteditable="false">'+ item.Fin.date.toString().substring(0,item.Fin.date.toString().indexOf(' ')+1)+
+			//'</td><td contenteditable="false">'+ item.Nr +
+			'</td></tr>';
+			dico = item.WorkCenter;
+			orde = item.ord;
+			}
+			else 
+			{
+			trHTML += 
+			'<tr' + ext_str +'><td contenteditable="false">' + item.WorkCenter +
+			'</td><td contenteditable="false">' + item.Order +
+			'</td><td contenteditable="false">' + item.Operation + 
+			'</td><td contenteditable="false">' + item.MRPController + 
+			'</td><td contenteditable="false">'+ item.Material +
+			'</td><td contenteditable="false">'+ item.OpDescription +
+			'</td><td contenteditable="false">'+ item.Qty +	
+			'</td><td contenteditable="false">'+ item.ProcessTime +
+			'</td><td ' + td_str + 'contenteditable="false">'+ sho+
+			//'</td><td contenteditable="false">' + item.LatestFinish + 			
+			//'</td><td contenteditable="false">'+ item.OrderFinish +
+			'</td><td ' + td_str + 'contenteditable="false">'+ sho2 +
+			'</td><td contenteditable="false" style="display:none;">' + item.Mat_des + 
+			//'</td><td ' + td_str + 'contenteditable="false">'+ item.Fin.date.toString().substring(0,item.Fin.date.toString().indexOf(' ')+1)+
+			//'</td><td contenteditable="false">'+ item.Nr +
+			'</td></tr>';
+			dico = item.WorkCenter;
+			orde = item.ord;
+			}
+        });
+        $('#zis_Tab').append(trHTML);
+            }
+        });
+
+ $.ajax({
+            type: 'GET',
+			url: 'SAP_CM01_Update.php',
+            //url: 'CM_ZO_1_1_Arg.php?argument1='+WC+'&argument2='+ Plant,
+			dataType: 'json',
+            cache: false,
+            success: function (response) {
+			$.each(response, function (i, item) {
+			
+			dae2 = new Date(item.DWN);
+			
+			if (isNaN(dae2)) 
+			{
+			dae2 = new Date(item.DWN.replace(" ","T")+"Z");
+			dae2.setHours(dae2.getHours() - 1);
+			}
+			
+			
+			if (dae2.getHours()<10)
+				{timi2 = '0'+dae2.getHours();}
+			else
+				{timi2 = dae2.getHours();}
+
+			if (dae2.getMinutes()<10)
+				{timi2 = timi2+':0'+dae2.getMinutes();}
+			else
+				{timi2 = timi2+':'+dae2.getMinutes();}
+			
+			document.getElementById("TITL").innerHTML = document.getElementById("TITL").innerHTML + ' at ' + timi2 + ' ' + monthNames[dae2.getMonth()] + ' ' + dae2.getDate() + '.';			
+			});
+			}
+			
+			});
+ //id="TITL"
+    
+var RowI;
+var ColU;		 
+$("#zis_Tab").on('click', 'tr',function(){
+$(this).addClass('selected').siblings().removeClass('selected');
+});
+    $("#zis_Tab").on('dblclick', 'tr',function(){
+   $(this).addClass('selected').siblings().removeClass('selected');    
+ value=$(this).index();
+ 
+console.log('Selection happened');
+
+var x = document.getElementById('pxm');
+var h = $('#pxm').find('#myModal').find('section').find('h2')
+//h["0"].find('#myModal')["0"].eq().find('PopHead');
+//console.log(x.innerHTML);
+//if (x.length > 0) {
+var element = $('#zis_Tab tr').eq(value+1).find('td').eq(1); 
+//.find('td').eq(2)
+//console.log(element["0"].innerHTML);
+console.log(x.innerHTML.substring(1,x.innerHTML.indexOf("<table")) + ' <h2> WO - ' + element["0"].innerHTML + ' </h2> '+ x.innerHTML.substring(x.innerHTML.indexOf("<table"),x.innerHTML.length));
+h[0].innerHTML = "WO - " + element["0"].innerHTML + " &nbsp &nbsp &nbsp &nbsp       <b>" + $('#zis_Tab tr').eq(value+1).find('td').eq(6)["0"].innerHTML + " x " +  $('#zis_Tab tr').eq(value+1).find('td').eq(4)["0"].innerHTML + "</b>  &nbsp &nbsp " +  $('#zis_Tab tr').eq(value+1).find('td').eq(10)["0"].innerHTML ;
+console.log("ajax link to be pulled: " +  'Pull_Modal_CM01_px.php?argument1='+WC+'&argument2='+ Plant+'&argument3='+ element["0"].innerHTML);
+var tbody = $('#Det').find("tr:gt(0)").remove();
+var trHTML;
+
+$.ajax({
+            type: 'GET',
+			url: 'Pull_Modal_CM01.php?argument1='+WC+'&argument2='+ Plant+'&argument3='+ element["0"].innerHTML,
+            //url: 'CM_ZO_1_1_Arg.php?argument1='+WC+'&argument2='+ Plant,
+			dataType: 'json',
+            cache: false,
+            success: function (response) {
+			trHTML = '';				
+			$.each(response, function (i, item) {
+			
+			arr = item.LatestFinish.toString().split('-')
+			
+			 var dat3  = new Date(Number(arr[0]),Number(arr[1])-1,Number(arr[2].substring(0, 2)));
+		 if( dat3.getDate().toString().length > 1)
+		 {var day = dat3.getDate();}
+		 else
+		 {var day = '0'+ dat3.getDate();}
+		 
+		 var Mnum = dat3.getMonth()+1
+		 
+		 if( Mnum.toString().length > 1)
+		 {var mon = Mnum.toString();}
+		 else
+		 {var mon = '0'+ Mnum.toString();}
+		 
+		 var sho = day+'-'+mon+'-'+dat3.getFullYear();
+		 
+		 arr = item.OrderFinish.toString().split('-')
+		var dat4  = new Date(Number(arr[0]),Number(arr[1])-1,Number(arr[2].substring(0, 2)));
+		 if( dat4.getDate().toString().length > 1)
+		 {var day = dat4.getDate();}
+		 else
+		 {var day = '0'+ dat4.getDate();}
+		 
+		 var Mnum = dat4.getMonth()+1
+		 
+		 if( Mnum.toString().length > 1)
+		 {var mon = Mnum.toString();}
+		 else
+		 {var mon = '0'+ Mnum.toString();}
+		 
+		 var sho2 = day+'-'+mon+'-'+dat4.getFullYear();
+
+		 
+			 trHTML += 
+			'<tr><td contenteditable="false">' + item.WorkCenter +
+			'</td><td contenteditable="false">' + item.Operation +
+			'</td><td contenteditable="false">' + item.OpDescription +
+			'</td><td contenteditable="false">' + item.Stat+ 
+			'</td><td contenteditable="false">' + item.MRPController + 
+			'</td><td contenteditable="false">'+ item.Qty +	
+			'</td><td contenteditable="false">'+ item.ProcessTime +
+			'</td><td contenteditable="false">'+ sho +
+			'</td><td contenteditable="false">'+ sho2 +
+			//'</td><td contenteditable="false">' + item.LatestFinish + 			
+			//'</td><td contenteditable="false">'+ item.OrderFinish +
+			//'</td><td ' + td_str + 'contenteditable="false">'+ sho2 +
+			//'</td><td ' + td_str + 'contenteditable="false">'+ item.Fin.date.toString().substring(0,item.Fin.date.toString().indexOf(' ')+1)+
+			//'</td><td contenteditable="false">'+ item.Nr +
+			'</td></tr>';
+			 });
+			
+			$('#Det').append(trHTML);
+			}
+			});
+//x.innerHTML = x.innerHTML.substring(1,x.innerHTML.indexOf("<table")) + ' <h2> WO - ' + element["0"].innerHTML + ' </h2> '+ x.innerHTML.substring(x.innerHTML.indexOf("<table"),x.innerHTML.length);
+var b = document.getElementById("bitBut");
+b.disabled = false;
+b.click();
+b.disabled = true;
+//}else{
+//console.log("There's glue in the kitchen sink!");
+//}
+
+//x[0].innerHTML = x[0].innerHTML.indexOf(">")
+//modal-heading="Magna Adipiscing"
+});
+
+});
+
+ 
+</script>
+
+
+<script type="text/javascript" language="javascript">
+window.onbeforeunload = function(e) {
+  var dialogText = 'Where the hell do you think you are going?!?!';
+  console.log(dialogText);
+  
+};
+</script>
+</body>
+
+</html>

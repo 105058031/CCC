@@ -2,5 +2,11 @@
 README.md
 manifest*
 logs
+node_modules
+gulp-project
+gulpfile.js
+package.json
+scripts_g
 test-*
 .bp-config/options-*
+

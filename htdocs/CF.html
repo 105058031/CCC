@@ -1,0 +1,43 @@
+<div id = "st">
+<body>
+
+<script>
+var thisDoc = document.currentScript.ownerDocument;
+
+  // thatDoc refers to the "importer", which is index.html
+  var thatDoc = document;
+
+  // grab the contents of the #blog-post from this document
+  // and append it to the importing document.
+  //var content = thisDoc.querySelector('#st');
+  
+  
+  $.ajax({
+			type: 'GET',
+			url: 'CF.php',
+			dataType: 'json',
+            cache: false,
+            success: function (result) {
+	
+	//if (thisDoc.querySelector('#ke').innerHTML>0) {
+  if (result>0) {
+  thatDoc.getElementById('tst').innerHTML = document.getElementById('tst').innerHTML + "<small><i> Cloud </i></small>";
+  }
+  else
+  {
+//
+//}else{
+//thatDoc.getElementById('tst').innerHTML = result;
+thatDoc.getElementById('tst').innerHTML = document.getElementById('tst').innerHTML + "<small><i> in Desktop mode </i></small>";
+//}
+	}
+	}
+	
+	
+});
+
+  
+</script>
+
+</body>
+</div>

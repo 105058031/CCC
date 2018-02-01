@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>CCC Rework Details</title>
+
+<audio id="Clicko" src="../dist/CLICK14A.mp3" ></audio>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../dist/components/brandkit/favicon/favicon.ico">
+<link href="../../../CSS/core-design.css" rel="stylesheet" type="text/css">
+<link href="../../../dist/css/iids1.css" rel="stylesheet" type="text/css">
+<link href="../../../dist/css/responsive.css" rel="stylesheet" type="text/css">
+<script src="/../scripts/d3.v4.js" type = "text/javascript"></script>
+<script src="/scripts/jquery-3.1.0.min.js" type = "text/javascript"></script>
+ <!--   <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../dist/css/justified-nav.css" rel="stylesheet">-->
+<script src="/../../dist/js/bootstrap.min.js" type = "text/javascript"></script>
+<!--<script src="/../../dist/js/dataTables.buttons.min.js" type = "text/javascript"></script>-->
+<script src="/../../dist/js/jquery.dataTables.min.js" type = "text/javascript"></script>
+<script src="/../../dist/js/dataTables.select.min.js" type = "text/javascript"></script>
+<!--<script src="/../../dist/js/dataTables.editor.min.js" type = "text/javascript"></script>-->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../dist/assets/ie10-viewport-bug-workaround.css" rel="stylesheet">
+	
+	
+<!--<script type="text/javascript" charset="utf8" src="/../../../js/dataTables.min.js"></script>-->
+<script type="text/javascript" charset="utf8" src="/../../../js/datatables.js"></script>
+<script type = "text/javascript">
+function DRAF(C,T) 
+{
+var audio = document.getElementById("Clicko");
+       audio.play();
+var Params = pass_Params();
+if (Params[0] == 'undefined' )
+{
+Params[0] = getCookie('plant');
+Params[1] = getCookie('cell');
+}
+if (Params[1] != 'undefined')
+{
+$.ajax({
+	url: 'Write_1_1.php?argument1=' + Params[1] + '&argument2=' + C + '&argument3=' + T + '&argument4=' + Params[0],
+	type: 'POST',
+	success: function (){console.log('That was cool! Check the DB!')}
+});
+
+
+
+}
+
+}
+</script>
+
+</head>
+<style>
+
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #FFFFFF;
+  shape-rendering: crispEdges;
+}
+
+.head1 {
+	
+	color: #EEEEEE;
+	font-family: GE Inspira;
+	font-size:	76px;
+}
+
+
+</style>
+<style>
+table.dataTable.hover tbody tr:hover,
+table.dataTable.hover tbody tr.odd:hover,
+table.dataTable.hover tbody tr.even:hover,
+table.dataTable.display tbody tr:hover,
+table.dataTable.display tbody tr.odd:hover,
+table.dataTable.display tbody tr.even:hover {
+  background-color: #FF0000;
+}
+table.dataTable tr:hover {
+  background-color: #FF0000;
+}
+
+html {
+    font-size: 22px;
+   }
+
+table.dataTable.no-footer
+{
+border-bottom:1px solid #FFFFFF
+}
+.btn-group-vertical 	{
+	position: relative;
+	top: 150px;
+	left: 220px;
+	width: 200px;
+	height: 280px;
+						}
+@media (max-width: 560px) {
+.btn.btn-lg 	{
+	border-radius: 4px;
+	width: 50px;
+	height: 35px;
+	padding: 2px 2px 2px 2px;
+	margin: 1.5px 3px 1.5px 3px;
+	font-size: 70%;
+	font-weight: normal;
+	}
+	.navbar-nav > li {
+  font-size: 13px;
+}				
+}	
+@media (min-width: 560px) {
+.btn.btn-lg 	{
+	border-radius: 4px;
+	width: 17.5%;
+	height: 40px;
+	padding: 4px 2px 4px 2px;
+	margin: 0.5% 1% 0.5% 1%;
+	font-size: 80%;
+	font-weight: normal;
+					}
+					.navbar-nav > li {
+  font-size: 15px;
+}			
+}		
+@media (min-width: 650px) {
+.btn.btn-lg 	{
+	border-radius: 4px;
+	width: 17.5%;
+	height: 40px;
+	padding: 5px 4px 5px 4px;
+	margin: 0.5% 1% 0.5% 1%;
+	font-size: 90%;
+	font-weight: normal;
+					}
+		.navbar-nav > li {
+  font-size: 16px;
+}							
+}		
+@media (min-width: 768px){
+.btn.btn-lg 	{
+border-radius: 6px;
+	border-radius: 8%;
+	width: 15.6%;
+	height: 40px;
+	margin: 0.5% 2% 0.5% 2%;
+	font-size: 100%;
+	font-weight: normal;
+					}
+	.navbar-nav > li {
+  font-size: 17px;
+}								
+}	
+@media (min-width: 992px){
+.btn.btn-lg 	{
+border-radius: 8px;
+	width: 15.7%;
+	height: 50px;
+	margin: 0.5% 2% 0.5% 2%;
+	font-size: 18px;
+	font-weight: normal;
+					}
+.navbar-nav > li {
+  font-size: 18px;
+}			
+.btn-group > .btn,
+.btn-group > .dropdown-menu,
+.btn-group > .popover {
+  font-size: 16px;
+}	
+}				
+@media (min-width: 1300px){	
+@.btn.btn-lg.btn-success	{
+@	  background-color: #6cc86c; /* Old browsers */
+@  background-image: -webkit-gradient(linear, left top, left bottom, from(#6cc86c), to(#0c622c));
+@  background-image: -webkit-linear-gradient(top, #6cc86c 0%,#0c622c 100%);
+@  background-image:      -o-linear-gradient(top, #6cc86c 0%, #0c622c 100%);
+@  background-image:         linear-gradient(to bottom, #6cc86c 0%,#0c622c 100%);
+ @ 
+	@					}					
+						
+@.btn.btn-lg.btn-warning	{
+@	  background-color: #f0ad4e; /* Old browsers */
+@  background-image: -webkit-gradient(linear, left top, left bottom, from(#f0ad4e), to(#804d00));
+@  background-image: -webkit-linear-gradient(top, #f0ad4e 0%,#804d00 100%);
+@  background-image:      -o-linear-gradient(top, #f0ad4e 0%, #804d00 100%);
+@  background-image:         linear-gradient(to bottom, #f0ad4e 0%,#804d00 100%);
+@  @
+@						}					
+
+@.btn.btn-lg.btn-danger	{
+@	  background-color: #d9534f; /* Old browsers */
+@  background-image: -webkit-gradient(linear, left top, left bottom, from(#d9534f), to(#890000));
+@  background-image: -webkit-linear-gradient(top, #d9534f 0%,#890000 100%);
+@  background-image:      -o-linear-gradient(top, #d9534f 0%, #890000 100%);
+@  background-image:         linear-gradient(to bottom, #d9534f 0%,#890000 100%);
+@	
+@	}					
+	}
+.btn.btn-lg.btn-success,
+.btn.btn-lg.btn-warning,
+.btn.btn-lg.btn-danger,
+{
+float: right;
+}	
+.btn-group-vertical>.btn:first-child:not(:last-child)
+		{
+	border-top-left-radius: 18px;
+	border-top-right-radius: 18px;	
+		
+		}				
+.btn-group-vertical>.btn:last-child:not(:first-child)
+		{
+	border-bottom-left-radius: 18px;
+	border-bottom-right-radius: 18px;
+		}	
+.btn:hover	{		
+	color: #FFFFFF;
+	background-color: #626262;
+	transition: background-color .1s linear, border-color .1s linear, color .1s linear; 
+    transition-property: background-color, border-color, color;
+    transition-duration: 0.1s, 0.1s, 0.1s;
+    transition-timing-function: linear, linear, linear;
+    transition-delay: initial, initial, initial;
+			}
+.clickable 	{
+		height: 100%;
+		width: 100%;
+		left: 0;
+		top: 0;
+		position: absolute;
+		z-index:1;
+			}
+table.dataTable tr.odd td.leftie,
+table.dataTable tr.even td.leftie
+		{
+		text-align: left;
+		font-family: "GE Sans", "ge-sans", "GE Inspira", "ge-inspira", Helvetica, Arial, sans-serif;
+		font-size: 15px;
+		color: #FFFFFF;
+		}
+table.dataTable tr.odd td.centie,
+table.dataTable tr.even td.centie
+		{
+		text-align: center;
+		font-family: "GE Sans", "ge-sans", "GE Inspira", "ge-inspira", Helvetica, Arial, sans-serif;
+		font-size: 15px;
+		color: #FFFFFF;
+		}
+table.dataTable thead .centie{
+  text-align: center;
+  
+}
+table.dataTable thead th,table.dataTable thead td{
+padding: 8px 18px 18px 10px;
+  border-bottom-color: #FFFFFF;
+  border-bottom:3px solid; 
+   background-color: transparent;
+}			
+table.dataTable thead th,table.dataTable tfoot th
+{
+
+font-weight: normal;
+font-size:25px;
+font-family: "GE Sans", "ge-sans", "GE Inspira", "ge-inspira", Helvetica, Arial, sans-serif;
+color: #FFFFFF;
+}
+
+.selected {
+    color: #FFF;
+	background-color: grey; /* Old browsers */
+  background-image: -webkit-gradient(linear, left top, left bottom, from(grey), to(grey));
+  background-image: -webkit-linear-gradient(top, grey 0%,grey 100%);
+  background-image:      -o-linear-gradient(top, grey 0%, grey 100%);
+  background-image:         linear-gradient(to bottom, grey 0%,grey 100%);
+	
+}
+
+</style>
+<body bgcolor="#000000">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<nav class="navbar navbar-static-top navbar-default" role="navigation">
+<div class="container">
+<div class="navbar-header">
+      <a class="navbar-brand" href="../../index.html"><span class="ge-logo"></span> <span>CCC Dashboard<small><i> on </i> Predix </small></span></a>
+      <!-- .navbar-toggle for collapsed navbar content -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+</div>
+<div class="pull-right">
+<div class="btn-toolbar pull-left">
+
+<div class="btn-group">
+          <button id="Tier_Button1" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown"><span id="Tier1"class="user-name">Choose Tier 1</span> <i class="icon-chevron-down"></i></button>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="?plant=6400">Farnborough</a></li>
+            <li><a href="?plant=1400">Lafayette</a></li>
+            <li><a href="?plant=1401">Conroe</a></li>
+          </ul>
+</div>
+<div class="btn-group">		
+
+<button id="Tier_Button2" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown"><span id="Tier2" class="user-name">Choose Tier 2</span> <i class="icon-chevron-down"></i></button>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="#">Choose Tier 1 first</a></li>
+          </ul>
+</div>
+
+</div>
+</div>
+</div>
+<div  style="background-color: dark-grey; width: 100%" class="primary-navbar nav-collapse">
+    <div class="container">
+		
+		<div class="responsive-elements">
+		
+		</div>
+      <ul class="nav navbar-nav">
+
+        <li><a href="/index.html">Home</a></li>        
+		<li><a href="/CCC_Ind_QUA_1_6.html">Quality</a></li>
+      </ul>
+
+	</div>
+</div>
+</nav>
+
+<div class="container content">
+<div class="row ui-sortable" style="height: 10%;">
+
+<div class="col-sm-12 col-md-12">
+<section class="module actionable draggable" style="background: transparent; height: 10%">
+<header class="module-header" >
+          <h2 class="voice voice-brand pull-left">Material Transactions</h2>
+</header>
+
+
+
+</section>
+</div>
+</div>
+<script src="/js/highcharts.js"></script>
+<script src="/js/modules/exporting.js" ></script>
+<script type="text/javascript" charset="utf8" src="/../../../js/datatables.js"></script>
+ <div class="row ui-sortable">
+ <div class="col-sm-12 col-md-12" style="">
+ <section class="module actionable draggable" style="background: transparent;">
+<table id="zis_Tab" class="table" style= "margin:1% 0 0 0" bgcolor="#00FF00">
+
+	<thead>
+		<tr>
+			<th> Material </th>
+			<th> Material Description</th>
+			<th> Order </th>
+			<th> MvT </th>
+			<th> Movement Type Text </th>
+			<th> Qty </th>
+			<th> Post Date</th>
+			
+			<!--th> Nr of competent operators</th-->
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+		
+			<!--td contenteditable='true'> 1 Data 1 </td>
+			<td> 1 Data 2 </td>
+			<td> 1 Data 3 </td>
+			<td> 1 Data 4 </td>
+			<td> 1 Data 5 </td-->
+		</tr>
+
+	</tbody>
+</table>
+</section>
+</div>
+</div>
+
+<script src="../../dist/components/bootstrap/js/collapse.js"></script>
+
+<script type="text/javascript">
+
+function find_Params()
+		{
+
+		var parameters = location.search.substring(1).split("&");
+		var temp;
+		var Tier= [0];
+		var gh;
+for (i=0;i<parameters.length;i++)
+			{
+		temp = parameters[i].split("=");
+		Tier[i] = unescape(temp[1]);
+
+
+		console.log(Tier[i]);
+			}
+	if (Tier[0]>0)
+	{
+	if (document.getElementById('Tier1').innerHTML !="Plant "+Tier[0])
+		{
+	document.getElementById('Tier1').innerHTML = "Plant "+Tier[0];
+	$.ajax({
+			type: 'GET',
+            url: 'Cells_1_0_Arg.php?argument1=' + Tier[0],
+			dataType: 'json',
+            cache: false,
+            success: function (result) 
+				{
+				document.getElementById('Tier2').innerHTML = "Choose the Cell";
+				console.log(document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML);
+				document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML = '';
+				$.each(result, function (i, item) {
+				console.log('WC'+result[i].Cell.substring(0,result[i].Cell.toString().indexOf(' ')));
+				document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML = document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML +
+				'<li><a href="?plant=' +Tier[0]+'&WC='+result[i].Cell+'">'+result[i].Cell +' Cell</a></li>';
+													});
+					if (Tier[1]!=undefined)
+					{
+					document.getElementById('Tier2').innerHTML = "WC "+Tier[1];
+					}
+				}
+	
+			});
+		}
+	else
+		{
+		if (Tier[1]!=undefined)
+			{
+			document.getElementById('Tier2').innerHTML = "WC "+Tier[1];
+			}
+		}
+	}
+	
+		}	
+find_Params();
+</script>
+<script type="text/javascript">
+function pass_Params()
+{
+var parameters = location.search.substring(1).split("&");
+		var temp;
+		var Tier= [0];
+		var gh;
+for (i=0;i<parameters.length;i++)
+			{
+		temp = parameters[i].split("=");
+		Tier[i] = unescape(temp[1]);
+			}
+return Tier;
+}
+
+</script>
+<script type="text/javascript">
+function getCookie(cname) {
+	var end;
+    var name = cname + "=";
+	var ca = document.cookie.split(';expires');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1);
+        }
+		if (c.indexOf('&') > c.indexOf(cname))
+		{
+		end = c.indexOf('&');
+		}
+		else
+		{
+		temp = c.length;
+		temp2 =  c.indexOf(';',c.indexOf(cname));
+		end = Math.max(temp,temp2);
+		}
+		         return c.substring(c.indexOf(name)+name.length,end);
+        
+    }
+    return "";
+	
+}
+
+function find_cookie_Params()
+		{
+
+		var parameters = [getCookie('plant'),getCookie('cell')];
+		var temp;
+		var Tier= [0];
+		var gh;
+		if (parameters[1]!=undefined) 
+				{
+for (i=0;i<parameters.length;i++)
+			{
+		Tier[i] = parameters[i];
+		console.log(Tier[i]);
+			}
+	if (Tier[0]>0)
+	{
+	if (document.getElementById('Tier1').innerHTML !="Plant "+Tier[0])
+		{
+	document.getElementById('Tier1').innerHTML = "Plant "+Tier[0];
+	$.ajax({
+			type: 'GET',
+            url: 'Cells_1_0_Arg.php?argument1=' + Tier[0],
+			dataType: 'json',
+            cache: false,
+            success: function (result) 
+				{
+				document.getElementById('Tier2').innerHTML = "Choose the Cell";
+				console.log(document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML);
+				document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML = '';
+				$.each(result, function (i, item) {
+				console.log(result[i].Cell.substring(0,result[i].Cell.toString().indexOf(' ')));
+				document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML = document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML +
+				'<li><a href="?plant=' +Tier[0]+'&WC='+result[i].Cell+'">'+result[i].Cell+' Cell</a></li>';
+													});
+					if (Tier[1]!=undefined)
+					{
+					document.getElementById('Tier2').innerHTML = "WC "+Tier[1];
+					}
+				}
+	
+			});
+		}
+	else
+		{
+		if (Tier[1]!=undefined)
+			{
+			document.getElementById('Tier2').innerHTML = "WC "+ Tier[1];
+			}
+		}
+	}
+	
+				}	
+		}
+
+</script>
+<script type="text/javascript" language="javascript">
+
+var Params = pass_Params();
+if (Params[0] == 'undefined' )
+{
+Params[0] = getCookie('plant');
+Params[1] = getCookie('cell');
+find_cookie_Params();
+}
+if (Params[0] == 'undefined')
+{
+Params[0]='-';
+Params[1]='-';
+}
+
+var WC = Params[1];
+var Plant = Params[0];
+
+var value;
+
+function Date_Pop(r, c, va) 
+{
+var element = $('#zis_Tab tr').eq(r).find('td').eq(c) 
+element[0].innerHTML = va + element[0].innerHTML;
+}
+
+$(document).ready(function(){
+var stat;
+var pstat;
+var ext_str;
+var td_str;
+$.ajax({
+            type: 'GET',
+			url: 'MTT_check.php?argument1='+WC+'&argument2='+ Plant,
+            //url: 'CM_ZO_1_1_Arg.php?argument1='+WC+'&argument2='+ Plant,
+			dataType: 'json',
+            cache: false,
+            success: function (response) {
+        var trHTML = '';   
+        $.each(response, function (i, item) {
+
+		var dat1 = new Date(item.Pstng_Date);
+		
+arr = item.Pstng_Date.toString().split('-')
+var dat2  = new Date(Number(arr[0]),Number(arr[1])-1,Number(arr[2].substring(0, 2)));
+		 if( dat2.getDate().toString().length > 1)
+		 {var day = dat2.getDate();}
+		 else
+		 {var day = '0'+ dat2.getDate();}
+		 
+		 var Mnum = dat2.getMonth()+1
+		 
+		 if( Mnum.toString().length > 1)
+		 {var mon = Mnum.toString();}
+		 else
+		 {var mon = '0'+ Mnum.toString();}
+		 
+		 var sho1 = day+'-'+mon+'-'+dat2.getFullYear();
+		
+ 
+			
+			trHTML += 
+			'<tr><td contenteditable="false">' + item.Material +
+			'</td><td contenteditable="false">'+ item.Mat_des +
+			'</td><td contenteditable="false">'+ item.Order +
+			'</td><td contenteditable="false">'+ item.MvT +
+			'</td><td contenteditable="false">' + item.MvTText +
+			'</td><td contenteditable="false">' + Number(item.Qty).toString() + 
+			'</td><td contenteditable="false">'+ sho1 +	
+			'</td></tr>';
+        });
+        $('#zis_Tab').append(trHTML);
+            }
+        });
+
+ 
+ 
+    
+var RowI;
+var ColU;		 
+
+    $("#zis_Tab").on('click', 'tr',function(){
+   $(this).addClass('selected').siblings().removeClass('selected');    
+ value=$(this).index();
+});
+
+});
+
+ 
+</script>
+
+
+<script type="text/javascript" language="javascript">
+window.onbeforeunload = function(e) {
+  var dialogText = 'Where the hell do you think you are going?!?!';
+  console.log(dialogText);
+  
+};
+</script>
+</body>
+
+</html>

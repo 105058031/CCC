@@ -1,0 +1,36 @@
+{
+  "name": "cf-ex-php-info",
+  "version": "1.0.0",
+  "description": "Digital CCC",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.15.3",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^2.0.1",
+    "gulp-webserver": "^0.9.1",
+    "is-cloudfoundry": "^0.1.1",
+    "mssql": "^4.1.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "gulp-coffee": "latest",
+    "gulp-concat": "latest",
+    "gulp-connect": "latest",
+    "gulp-connect-php": "^1.0.1",
+    "gulp-sass": "latest",
+    "gulp-uglify": "latest",
+    "gulp-util": "latest"
+  },
+  "scripts": {
+    "test": "gulp webserver\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[-"
+  },
+  "repository": {
+    "type": "git",
+    "url": "none"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "Gabor Dubniczki",
+  "license": "UNLICENSED"
+}

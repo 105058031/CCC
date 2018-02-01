@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<!-- changes from Cost_Analysis4_2.html: abs function has been created 																												-->
+<!-- Version 4_1 testing: 																																							-->		
+<!-- 									links on headerlines fixe -->
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>SAP Data Info board</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link href="/../../../dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="icon" href="/../../../dist/components/brandkit/favicon/favicon.ico">
+<link href="/../../../dist/css/iids.css" rel="stylesheet" type="text/css">
+<link href="/../../../dist/css/responsive.css" rel="stylesheet" type="text/css">
+<link href="/../../../CSS/core-design.css" rel="stylesheet" type="text/css">
+<!--<script src="/../../../js/highcharts_regression.js" type = "text/javascript"></script>8?-->
+<script src="/../../../js/regression.js" type = "text/javascript"></script>
+<!--<script src="/../../../js/technical_indicators.js" type = "text/javascript"></script>-->
+<script type = "text/javascript"> 
+function areSameDate(d1, d2) {
+    return d1.getFullYear() == d2.getFullYear()
+        && d1.getMonth() == d2.getMonth()
+        && d1.getDate() == d2.getDate();
+}
+</script>
+
+<script src="/../../../scripts/jquery-3.1.0.min.js" type = "text/javascript"></script>
+<link href="/../../../dist/css/jquery-ui.css" rel="stylesheet" type="text/css">
+
+<!--<link rel="stylesheet" type="text/css" href="/../CSS/dataTables.min.css">-->
+<!--<script type="text/javascript" charset="utf8" src="/../../../js/dataTables.min.js"></script>-->
+<!--<script type="text/javascript" charset="utf8" src="/../../../js/datatables.js"></script>-->
+ <style rel="stylesheet" type="text/css">
+  table.-borders--top-bottom th, table.-borders--top-bottom.ge-datatable th {
+    <!--border-top: 1px solid #bcbcbc;-->
+	<!--border-bottom: 1px solid #bcbcbc;-->
+  
+  }
+       
+  table th, table.ge-datatable th {
+  font-family: "GE Inspira";
+color: #1a1a1a;
+font-weight: bold;
+    border-top: 1px solid #bcbcbc;
+}
+
+table td, table.ge-datatable td {
+   border-top: 1px solid #bcbcbc;
+}
+</style>
+
+<style media = "screen" type = "text/css">
+#container  {
+height : 100%;
+width : 100%;
+position:absolute;
+}
+table th, table.ge-datatable th {
+    padding-left: 2%;
+
+}
+table td, table.ge-datatable td {
+    padding-left: 2%;
+
+}
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+td {
+    word-wrap: break-word
+}
+
+@media (min-width: 240px){
+table, table.ge-datatable {
+    font-size: 5px;
+}
+}
+@media (min-width: 320px){
+table, table.ge-datatable {
+    font-size: 6px;
+}
+}
+@media (min-width: 480px){
+table, table.ge-datatable {
+    font-size: 9px;
+}
+}
+@media (min-width: 560px){
+table, table.ge-datatable {
+    font-size: 11px;
+}
+}
+@media (min-width: 650px){
+table, table.ge-datatable {
+    font-size: 13px;
+}
+}
+@media (min-width: 768px){
+table, table.ge-datatable {
+    font-size: 15px;
+}
+}
+@media (min-width: 992px){
+table, table.ge-datatable {
+    font-size: 16px;
+}
+}
+
+</style>
+<!-- <link href="../../../css/Jquery-ui.css" rel="stylesheet" type="text/css"> //-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
+</head>
+
+<div style="background-color: black; width: 100%;" class="navbar-header">
+      <a class="navbar-brand" href="../../index.html"><span class="ge-logo"></span> <span>SAP Data Info board <small><i>powered by</i> IIDx </small></span></a>
+      <!-- .navbar-toggle for collapsed navbar content -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+</div>
+<body bgcolor="#000000" style = "background-color: #FFFFFF;">
+<div  style="background-color: dark-grey; width: 100%;" class="primary-navbar nav-collapse">
+    <div class="container">
+	
+      <ul class="nav navbar-nav">
+
+       </ul>
+
+	</div> 
+</div> 
+
+<div class = "container content">
+
+
+<div>
+<div style="left:15px; height: 15px;width: 100%;"></div>
+<h1 id = "head" style="color:black; font-size:2em;" > Data Tables Last Updated</h1>
+</div>
+<!-- /.row -->
+
+<!--  -->
+ 
+<!--<div id ="donk" style="width: 600px ; margin: 20px 35px 0 35px ; font-style:arial" > sd </div> -->
+<!--ko-->
+<script src="/js/highcharts.js"></script>
+<script src="/js/modules/exporting.js" ></script>
+<script type="text/javascript" charset="utf8" src="/../../../js/datatables.js"></script>
+
+<div id="sepa" style="height: 10px;width: 100%"></div>
+
+<div class="col-sm-12 col-md-12">
+<section class="module actionable draggable"  style=" box-shadow: 6px 6px 5px #888888"> 
+<header class="module-header">
+          <h2 class="voice voice-brand pull-left">Cloud PGSQL</h2>
+</header>
+<table id="zis_Tab_c" class="ge-datatable -borders--top-bottom" style="margin: 3% 3% 3% 3%; width: 95%;" bgcolor="#00FF00">
+	<thead >
+		<tr>
+			<th> Data </th>
+			<th> Table </th>
+			<th> SAP Download </th>
+			<th> Time of Day </th>
+			<th> Cloud Push </th>
+			<th> Time of Day </th>
+		</tr>
+	</thead>
+	<tbody>
+	
+	</tbody>
+</table>
+</section>
+</div>
+
+<div class="col-sm-12 col-md-12">
+<section class="module actionable draggable"  style=" box-shadow: 6px 6px 5px #888888"> 
+<header class="module-header">
+          <h2 class="voice voice-brand pull-left">Desktop PGSQL</h2>
+</header>
+<table id="zis_Tab_d" class="ge-datatable -borders--top-bottom" style="margin: 3% 3% 3% 3%; width: 95%;" bgcolor="#00FF00">
+	<thead >
+		<tr>
+			<th> Data </th>
+			<th> Table </th>
+			<th> SAP Download </th>
+			<th> Time of Day </th>
+			<th> Cloud Push </th>
+			<th> Time of Day </th>
+		</tr>
+	</thead>
+	<tbody>
+	
+	</tbody>
+</table>
+</section>
+</div>
+
+<div class="col-sm-12 col-md-12">
+<section class="module actionable draggable"  style=" box-shadow: 6px 6px 5px #888888"> 
+<header class="module-header">
+          <h2 class="voice voice-brand pull-left">Desktop MSSQL</h2>
+</header>
+<table id="zis_Tab_s" class="ge-datatable -borders--top-bottom" style="margin: 3% 3% 3% 3%; width: 95%;" bgcolor="#00FF00">
+	<thead >
+		<tr>
+			<th> Data </th>
+			<th> Table </th>
+			<th> SAP Download </th>
+			<th> Time of Day </th>
+			<th> Cloud Push </th>
+			<th> Time of Day </th>
+		</tr>
+	</thead>
+	<tbody>
+	
+	</tbody>
+</table>
+</section>
+</div>
+<div class="col-sm-12 col-md-12">
+<section class="module actionable draggable"  style=" box-shadow: 6px 6px 5px #888888"> 
+<header class="module-header">
+          <h2 class="voice voice-brand pull-left">Deprecated Cloud</h2>
+</header>
+<table id="zis_Tab_cd" class="ge-datatable -borders--top-bottom" style="margin: 3% 3% 3% 3%; width: 95%;" bgcolor="#00FF00">
+	<thead >
+		<tr>
+			<th> Data </th>
+			<th> Table </th>
+			<th> SAP Download </th>
+			<th> Time of Day </th>
+			<th> Cloud Push </th>
+			<th> Time of Day </th>
+		</tr>
+	</thead>
+	<tbody>
+	
+	</tbody>
+</table>
+</section>
+</div>
+</div>
+<div class="container" style="left:10%; width: 80%; height:auto;">
+<section class="module actionable draggable" style="background: transparent; height: auto;">
+<header class="module-header">
+          <h2 class="voice voice-brand pull-left">Rework</h2>
+</header>
+<table id="zis_Tab_rw" class="ge-datatable -borders--top-bottom"  style="margin: 3% 3% 3% 3%; width: 95%; height: auto;" bgcolor="#00FF00">
+
+	<thead>
+		<tr>
+			<th> Work Ctr</th>
+			<th> Date </th>
+			<th> Time </th>
+			<th> Material</th>
+			<th> WO</th>
+			<th> Op</th>
+			<th> Emp </th>
+			<th> RWK Hrs</th>
+			<th> Pull Date</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+		</tr>
+
+	</tbody>
+</table>
+</section>
+</div>
+<div class="container" style="flex: 1;left:10%; width: 80%; height:auto;">
+ <section class="module actionable draggable" style="background: transparent; height: auto;">
+<header class="module-header">
+          <h2 class="voice voice-brand pull-left">Transactions</h2>
+</header>
+<table id="zis_Tab_MT" class="ge-datatable -borders--top-bottom" style="margin: 3% 3% 3% 3%; width: 95%; height: auto;" bgcolor="#00FF00">
+	<thead >
+		<tr>
+			<th> Material </th>
+			<th> Material Description</th>
+			<th> Order </th>
+			<th> MvT </th>
+			<th> Movement Type Text </th>
+			<th> Qty </th>
+			<th> Post Date</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+	</tbody>
+</table>
+</section>
+</div>
+
+<script type = "text/javascript">
+// $('#TextBox2').change(function () {alert('changed');});
+$(document).ready(function(){
+    
+var Plonker_WO = Array();
+var Plonker_Cost_Element = Array();
+var Plonker_Cost_Description = Array();
+var Plonker_Actual = Array();
+var Plonker_Posted = Array();
+var Plonker_Posted2 = Array();
+var dat_Tab = [];
+
+
+
+
+	
+
+																		
+$.getJSON("/SAP_Cloud_Push_Feedback.php", function (data) {
+     var items = [];
+	 var i;
+	 for (i = 0; i < data.length; i++)
+	 {
+		Plonker_WO[i] = data[i].TAB;
+		//Plonker_Cost_Element[i] = data[i].UL;
+		//Plonker_Cost_Description[i] = data[i].Cost_EL_Desc;
+		//Plonker_Actual[i] = Number(data[i].Sum_Act);
+		Plonker_Posted[i] = data[i].DWN;
+		Plonker_Posted2[i] = data[i].PSH;
+	 }
+	 var gauge;
+var seriesData = [];
+var Dixie_Data = ['CM01','COOH','COOP','MB51','MB52','PLAF','ZP03','ZP07','OOB_','KOC4','NCR_','NCR'];
+var Dixie_Septo_Data = ['Despatch List','Coois Headers','Coois Operations','Material Transactions','Stock','Valuations','Labor Booking','Open POs','Open Order Book','Variance', 'NCR data', 'NCR data'];
+var Dixie_Color_Data = ['#7cb5ec','#006600', '#910000','#FF0000','#3F6C6C','#BFBFBF','#9D9D9D','#9D9D9D'];
+var Dixie_TableKey_Data = ['c','d','s',''];
+var Dixie_Table_Data = ['zis_Tab_c','zis_Tab_d', 'zis_Tab_s', 'zis_Tab_cd'];
+var Datesie = [];
+var Dosh_Data = [];
+var Dick_schlonk = [' ','  ','   ','    ','     ','      ','       ','        ','         '];
+var PushData = [];
+var colu;
+var tabCh;
+var colu2;
+var xCategories = [];
+var i, j, k, cat, woc, st, h;
+var dae = new Date();
+var dae2 = new Date();
+var today = new Date();
+var skabamm;
+var interm;
+var dati;
+var timi;																	
+var stat;
+var pstat;
+var ext_str;
+var td_str;
+
+for (k = 0; k < data.length; k++)
+	 {
+dat_Tab[k] = [];
+
+gauge = Plonker_WO[k];
+gauge = gauge.replace(" ", "");
+gauge = gauge.replace(" ", "")
+interm = gauge
+gauge = gauge.slice(0,4);
+if (interm.length > 5) {
+skabamm = interm[5];
+}else
+{
+skabamm = '';
+}
+tabCh = Dixie_Table_Data[Dixie_TableKey_Data.indexOf(skabamm)];
+woc = Dixie_Data.indexOf(gauge);
+dae = new Date(Plonker_Posted[k]);
+dae2 = new Date(Plonker_Posted2[k]);
+if (areSameDate(today,dae))
+{
+colu = "#99FF99";
+}else{
+colu = "#FFAAAA";
+}
+
+if (areSameDate(today,dae2))
+{
+colu2 = "#99FF99";
+}else{
+colu2 = "#FFAAAA";
+}
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx          TIME of DAY DOWNLOAD         XXXXXXXXXXXXXXXXXXXXXXXXXXX
+if (dae.getDate()<10)
+{dati = '0'+dae.getDate();}
+else
+{dati = dae.getDate();}
+
+if (dae.getMonth()<10)
+{dati = dati+'-0'+(dae.getMonth()+1);}
+else
+{dati = dati+'-'+(dae.getMonth()+1);}
+
+dati = dati + '-'+dae.getFullYear();
+
+if (dae.getHours()<10)
+{timi = '0'+dae.getHours();}
+else
+{timi = dae.getHours();}
+
+if (dae.getMinutes()<10)
+{timi = timi+':0'+dae.getMinutes();}
+else
+{timi = timi+':'+dae.getMinutes();}
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx          TIME of DAY PUSH         XXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+if (dae2.getDate()<10)
+{dati2 = '0'+dae2.getDate();}
+else
+{dati2 = dae2.getDate();}
+
+if (dae2.getMonth()<10)
+{dati2 = dati2+'-0'+(dae2.getMonth()+1);}
+else
+{dati2 = dati2+'-'+(dae2.getMonth()+1);}
+
+dati2 = dati2 + '-'+dae2.getFullYear();
+
+if (dae2.getHours()<10)
+{timi2 = '0'+dae2.getHours();}
+else
+{timi2 = dae2.getHours();}
+
+if (dae2.getMinutes()<10)
+{timi2 = timi2+':0'+dae2.getMinutes();}
+else
+{timi2 = timi2+':'+dae2.getMinutes();}
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx          TIME of DAY DONE         XXXXXXXXXXXXXXXXXXXXXXXXXXX
+															
+         if (!document.getElementsByTagName) return;
+		 tabBody=document.getElementById(tabCh)
+         //tabBody=document.getElementById("zis_Tab_d").item(0);
+         row=document.createElement("tr");
+         cell1 = document.createElement("td");
+         cell2 = document.createElement("td");
+		 cell3 = document.createElement("td");
+		 cell4 = document.createElement("td");
+		 cell5 = document.createElement("td");
+		 cell6 = document.createElement("td");
+         textnode1=document.createTextNode(Dixie_Septo_Data[woc]);
+         textnode2=document.createTextNode(Plonker_WO[k]);
+		 textnode3=document.createTextNode(dati);
+         textnode4=document.createTextNode(timi);
+		 textnode5=document.createTextNode(dati2);
+         textnode6=document.createTextNode(timi2);
+		 cell3.bgColor = colu;
+		 cell5.bgColor = colu2;
+		 
+		 cell1.appendChild(textnode1);
+         cell2.appendChild(textnode2);
+		 cell3.appendChild(textnode3);
+		 cell4.appendChild(textnode4);
+		 cell5.appendChild(textnode5);
+		 cell6.appendChild(textnode6);
+         row.appendChild(cell1);
+         row.appendChild(cell2);
+		 row.appendChild(cell3);
+		 row.appendChild(cell4);
+		 row.appendChild(cell5);
+		 row.appendChild(cell6);
+         tabBody.appendChild(row);
+																															
+}
+							});
+		
+$.ajax({
+            type: 'GET',
+			url: 'RWK_check.php?argument1=PL&argument2=6400',
+            //url: 'CM_ZO_1_1_Arg.php?argument1='+WC+'&argument2='+ Plant,
+			dataType: 'json',
+            cache: false,
+            success: function (response) {
+            var dico = '';
+        var trHTML = '';   
+        $.each(response, function (i, item) {
+		if (item.WorkCenter != dico && i!=0)
+		{
+		ext_str = 'style="border-top: 2px solid #888;"><td style="color: #e1e1e1;">_______</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr style="border-top: 2px solid #888;"'; 
+		}
+		else
+		{
+		ext_str = '';
+		}
+		var dat1 = new Date(item.Date);
+		
+arr = item.Date.toString().split('-')
+var dat2  = new Date(Number(arr[0]),Number(arr[1])-1,Number(arr[2].substring(0, 2)));
+		 if( dat2.getDate().toString().length > 1)
+		 {var day = dat2.getDate();}
+		 else
+		 {var day = '0'+ dat2.getDate();}
+		 
+		 var Mnum = dat2.getMonth()+1
+		 
+		 if( Mnum.toString().length > 1)
+		 {var mon = Mnum.toString();}
+		 else
+		 {var mon = '0'+ Mnum.toString();}
+		 
+		 var sho1 = day+'-'+mon+'-'+dat2.getFullYear();
+		
+arr = item.Time.toString().split(':')
+n = arr[0].indexOf(" ");
+	 
+		 var sho2 = arr[0].substring(n,n+3) +':'+ arr[1] + ':' + arr[2];
+
+arr = item.Pull_Date.toString().split('-')
+var dat4  = new Date(Number(arr[0]),Number(arr[1])-1,Number(arr[2].substring(0, 2)));
+		 if( dat4.getDate().toString().length > 1)
+		 {var day = dat4.getDate();}
+		 else
+		 {var day = '0'+ dat4.getDate();}
+		 
+		 var Mnum = dat4.getMonth()+1
+		 
+		 if( Mnum.toString().length > 1)
+		 {var mon = Mnum.toString();}
+		 else
+		 {var mon = '0'+ Mnum.toString();}
+		 
+		 var sho3 = day+'-'+mon+'-'+dat4.getFullYear();
+		 
+			
+			trHTML += 
+			'<tr' + ext_str +'><td contenteditable="false">' + item.WorkCenter +
+			'</td><td contenteditable="false">'+ sho1 +
+			'</td><td contenteditable="false">'+ sho2 +
+			'</td><td contenteditable="false">'+ item.Material +
+			'</td><td contenteditable="false">' + item.Order +
+			'</td><td contenteditable="false">' + Number(item.Operation).toString() + 
+			'</td><td contenteditable="false">' + item.Emp + 
+			'</td><td contenteditable="false">'+ item.Rework +
+			'</td><td contenteditable="false">'+ sho3 +	
+			'</td></tr>';
+			dico = item.WorkCenter;
+			
+        });
+        $('#zis_Tab_rw').append(trHTML);
+            }
+        });		
+$.ajax({
+            type: 'GET',
+			url: 'RWK_check.php?argument1=OH&argument2=6400',
+            //url: 'CM_ZO_1_1_Arg.php?argument1='+WC+'&argument2='+ Plant,
+			dataType: 'json',
+            cache: false,
+            success: function (response) {
+            var dico = '';
+        var trHTML = '';   
+        $.each(response, function (i, item) {
+		if (item.WorkCenter != dico && i!=0)
+		{
+		ext_str = 'style="border-top: 2px solid #888;"><td style="color: #e1e1e1;">_______</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr style="border-top: 2px solid #888;"'; 
+		}
+		else
+		{
+		ext_str = '';
+		}
+		var dat1 = new Date(item.Date);
+		
+arr = item.Date.toString().split('-')
+var dat2  = new Date(Number(arr[0]),Number(arr[1])-1,Number(arr[2].substring(0, 2)));
+		 if( dat2.getDate().toString().length > 1)
+		 {var day = dat2.getDate();}
+		 else
+		 {var day = '0'+ dat2.getDate();}
+		 
+		 var Mnum = dat2.getMonth()+1
+		 
+		 if( Mnum.toString().length > 1)
+		 {var mon = Mnum.toString();}
+		 else
+		 {var mon = '0'+ Mnum.toString();}
+		 
+		 var sho1 = day+'-'+mon+'-'+dat2.getFullYear();
+		
+arr = item.Time.toString().split(':')
+n = arr[0].indexOf(" ");
+	 
+		 var sho2 = arr[0].substring(n,n+3) +':'+ arr[1] + ':' + arr[2];
+
+arr = item.Pull_Date.toString().split('-')
+var dat4  = new Date(Number(arr[0]),Number(arr[1])-1,Number(arr[2].substring(0, 2)));
+		 if( dat4.getDate().toString().length > 1)
+		 {var day = dat4.getDate();}
+		 else
+		 {var day = '0'+ dat4.getDate();}
+		 
+		 var Mnum = dat4.getMonth()+1
+		 
+		 if( Mnum.toString().length > 1)
+		 {var mon = Mnum.toString();}
+		 else
+		 {var mon = '0'+ Mnum.toString();}
+		 
+		 var sho3 = day+'-'+mon+'-'+dat4.getFullYear();
+		 
+			
+			trHTML += 
+			'<tr' + ext_str +'><td contenteditable="false">' + item.WorkCenter +
+			'</td><td contenteditable="false">'+ sho1 +
+			'</td><td contenteditable="false">'+ sho2 +
+			'</td><td contenteditable="false">'+ item.Material +
+			'</td><td contenteditable="false">' + item.Order +
+			'</td><td contenteditable="false">' + Number(item.Operation).toString() + 
+			'</td><td contenteditable="false">' + item.Emp + 
+			'</td><td contenteditable="false">'+ item.Rework +
+			'</td><td contenteditable="false">'+ sho3 +	
+			'</td></tr>';
+			dico = item.WorkCenter;
+			
+        });
+        $('#zis_Tab_rw').append(trHTML);
+            }
+        });	
+	$.ajax({
+            type: 'GET',
+			url: 'RWK_check.php?argument1=WI&argument2=6400',
+            //url: 'CM_ZO_1_1_Arg.php?argument1='+WC+'&argument2='+ Plant,
+			dataType: 'json',
+            cache: false,
+            success: function (response) {
+            var dico = '';
+        var trHTML = '';   
+        $.each(response, function (i, item) {
+		if (item.WorkCenter != dico && i!=0)
+		{
+		ext_str = 'style="border-top: 2px solid #888;"><td style="color: #e1e1e1;">_______</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr style="border-top: 2px solid #888;"'; 
+		}
+		else
+		{
+		ext_str = '';
+		}
+		var dat1 = new Date(item.Date);
+		
+arr = item.Date.toString().split('-')
+var dat2  = new Date(Number(arr[0]),Number(arr[1])-1,Number(arr[2].substring(0, 2)));
+		 if( dat2.getDate().toString().length > 1)
+		 {var day = dat2.getDate();}
+		 else
+		 {var day = '0'+ dat2.getDate();}
+		 
+		 var Mnum = dat2.getMonth()+1
+		 
+		 if( Mnum.toString().length > 1)
+		 {var mon = Mnum.toString();}
+		 else
+		 {var mon = '0'+ Mnum.toString();}
+		 
+		 var sho1 = day+'-'+mon+'-'+dat2.getFullYear();
+		
+arr = item.Time.toString().split(':')
+n = arr[0].indexOf(" ");
+	 
+		 var sho2 = arr[0].substring(n,n+3) +':'+ arr[1] + ':' + arr[2];
+
+arr = item.Pull_Date.toString().split('-')
+var dat4  = new Date(Number(arr[0]),Number(arr[1])-1,Number(arr[2].substring(0, 2)));
+		 if( dat4.getDate().toString().length > 1)
+		 {var day = dat4.getDate();}
+		 else
+		 {var day = '0'+ dat4.getDate();}
+		 
+		 var Mnum = dat4.getMonth()+1
+		 
+		 if( Mnum.toString().length > 1)
+		 {var mon = Mnum.toString();}
+		 else
+		 {var mon = '0'+ Mnum.toString();}
+		 
+		 var sho3 = day+'-'+mon+'-'+dat4.getFullYear();
+		 
+			
+			trHTML += 
+			'<tr' + ext_str +'><td contenteditable="false">' + item.WorkCenter +
+			'</td><td contenteditable="false">'+ sho1 +
+			'</td><td contenteditable="false">'+ sho2 +
+			'</td><td contenteditable="false">'+ item.Material +
+			'</td><td contenteditable="false">' + item.Order +
+			'</td><td contenteditable="false">' + Number(item.Operation).toString() + 
+			'</td><td contenteditable="false">' + item.Emp + 
+			'</td><td contenteditable="false">'+ item.Rework +
+			'</td><td contenteditable="false">'+ sho3 +	
+			'</td></tr>';
+			dico = item.WorkCenter;
+			
+        });
+        $('#zis_Tab_rw').append(trHTML);
+            }
+        });	
+$.ajax({
+            type: 'GET',
+			url: 'MTT_check.php?argument1=*&argument2=6400',
+            //url: 'CM_ZO_1_1_Arg.php?argument1='+WC+'&argument2='+ Plant,
+			dataType: 'json',
+            cache: false,
+            success: function (response) {
+        var trHTML = '';   
+        $.each(response, function (i, item) {
+
+		var dat1 = new Date(item.Pstng_Date);
+		
+arr = item.Pstng_Date.toString().split('-')
+var dat2  = new Date(Number(arr[0]),Number(arr[1])-1,Number(arr[2].substring(0, 2)));
+		 if( dat2.getDate().toString().length > 1)
+		 {var day = dat2.getDate();}
+		 else
+		 {var day = '0'+ dat2.getDate();}
+		 
+		 var Mnum = dat2.getMonth()+1
+		 
+		 if( Mnum.toString().length > 1)
+		 {var mon = Mnum.toString();}
+		 else
+		 {var mon = '0'+ Mnum.toString();}
+		 
+		 var sho1 = day+'-'+mon+'-'+dat2.getFullYear();
+		
+			trHTML += 
+			'<tr><td contenteditable="false">' + item.Material +
+			'</td><td contenteditable="false">'+ item.Mat_des +
+			'</td><td contenteditable="false">'+ item.Order +
+			'</td><td contenteditable="false">'+ item.MvT +
+			'</td><td contenteditable="false">' + item.MvTText +
+			'</td><td contenteditable="false">' + Number(item.Qty).toString() + 
+			'</td><td contenteditable="false">'+ sho1 +	
+			'</td></tr>';
+        });
+        $('#zis_Tab_MT').append(trHTML);
+            }
+        });				
+				
+							
+								
+						});
+			
+      
+
+</script>
+</body>
+</html>

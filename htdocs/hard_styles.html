@@ -1,0 +1,315 @@
+<div id="st"> 
+
+<style>
+
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #FFFFFF;
+  shape-rendering: crispEdges;
+}
+
+.hexagon {
+ 
+  fill: #FF0000;
+  stroke: #000000;
+  stroke-width: 1.1px;
+  position: relative;
+    display: inline-block;
+}
+.head1 {
+	
+	color: #EEEEEE;
+	font-family: GE Inspira;
+	font-size:	48px;
+}
+
+
+</style>
+<style>
+
+.btn-group-vertical 	{
+	position: relative;
+	top: 150px;
+	left: 220px;
+	width: 200px;
+	height: 280px;
+						}
+.btn.btn-lg 	{
+	height: 40px;
+	font-size: 18px;
+	font-weight: normal;
+				}
+.btn.btn-med 	{
+	height: 35px;
+	font-size: 18px;
+	font-weight: normal;
+	background-color: #444462;
+				}
+.btn-group-vertical>.btn:first-child:not(:last-child)
+		{
+	border-top-left-radius: 18px;
+	border-top-right-radius: 18px;	
+		
+		}				
+.btn-group-vertical>.btn:last-child:not(:first-child)
+		{
+	border-bottom-left-radius: 18px;
+	border-bottom-right-radius: 18px;
+		}	
+.btn:hover	{		
+	color: #FFFFFF;
+	background-color: #626262;
+	transition: background-color .1s linear, border-color .1s linear, color .1s linear; 
+    transition-property: background-color, border-color, color;
+    transition-duration: 0.1s, 0.1s, 0.1s;
+    transition-timing-function: linear, linear, linear;
+    transition-delay: initial, initial, initial;
+			}
+.clickable 	{
+		height: 100%;
+		width: 100%;
+		left: 0;
+		top: 0;
+		position: absolute;
+		z-index:1;
+			}
+svg {fill:black; float:left}
+</style> 
+<style>
+table.dataTable.hover tbody tr:hover,
+table.dataTable.hover tbody tr.odd:hover,
+table.dataTable.hover tbody tr.even:hover,
+table.dataTable.display tbody tr:hover,
+table.dataTable.display tbody tr.odd:hover,
+table.dataTable.display tbody tr.even:hover {
+  background-color: #FF0000;
+}
+table.dataTable tr:hover {
+  background-color: #FF0000;
+}
+
+html {
+    font-size: 18px;
+   }
+
+table.dataTable.no-footer
+{
+border-bottom:1px solid #FFFFFF
+}
+.btn-group-vertical 	{
+	position: relative;
+	top: 150px;
+	left: 220px;
+	width: 200px;
+	height: 280px;
+						}
+@media (max-width: 560px) {
+.btn.btn-lg 	{
+	border-radius: 4px;
+	width: 18%;
+	height: 35px;
+	padding: 4px 2px 4px 2px;
+	margin: 0.5% 0.5% 0.5% 0.5%;
+	font-size: 70%;
+	font-weight: normal;
+	}
+	.navbar-nav > li {
+  font-size: 13px;
+}
+	table	{
+		font-size:4px; 
+}
+}	
+@media (min-width: 560px) {
+.btn.btn-lg 	{
+	border-radius: 6px;
+	width: 17.5%;
+	height: 35px;
+	padding: 4px 2px 4px 2px;
+	margin: 0.5% 1% 0.5% 1%;
+	font-size: 80%;
+	font-weight: normal;
+					}
+					.navbar-nav > li {
+  font-size: 15px;
+}		
+
+}		
+@media (min-width: 650px) {
+.btn.btn-lg 	{
+	border-radius: 4px;
+	width: 17.5%;
+	height: 35px;
+	padding: 5px 4px 5px 4px;
+	margin: 0.5% 1% 0.5% 1%;
+	font-size: 90%;
+	font-weight: normal;
+					}
+		.navbar-nav > li {
+  font-size: 16px;
+}			
+table, table.ge-datatable {
+    font-size: 10px;
+
+}				
+}		
+@media (min-width: 768px){
+.btn.btn-lg 	{
+border-radius: 6px;
+	border-radius: 8%;
+	width: 15.6%;
+	height: 35px;
+	margin: 0.5% 2% 0.5% 2%;
+	font-size: 100%;
+	font-weight: normal;
+					}
+	.navbar-nav > li {
+  font-size: 17px;
+}		
+table, table.ge-datatable {
+    font-size: 12px;
+
+}								
+}	
+@media (min-width: 992px){
+.btn.btn-lg 	{
+border-radius: 8px;
+	width: 15.7%;
+	height: 35px;
+	margin: 0.5% 2% 0.5% 2%;
+	font-size: 18px;
+	font-weight: normal;
+					}
+.navbar-nav > li {
+  font-size: 18px;
+}			
+.btn-group > .btn,
+.btn-group > .dropdown-menu,
+.btn-group > .popover {
+  font-size: 16px;
+}	
+table, table.ge-datatable {
+    font-size: 1em;
+
+}		
+}				
+@media (min-width: 2660px){	
+.btn.btn-lg.btn-success	{
+	  background-color: #6cc86c; /* Old browsers */
+  
+  
+						}					
+						
+.btn.btn-lg.btn-warning	{
+	  background-color: #FFFF00; /* Old browsers */
+  
+  
+						}					
+
+.btn.btn-lg.btn-danger	{
+	  background-color: #d9534f; /* Old browsers */
+  
+	
+	}					
+	}
+.btn.btn-lg.btn-success,
+.btn.btn-lg.btn-warning,
+.btn.btn-lg.btn-danger,
+{
+float: right;
+}	
+.btn-group-vertical>.btn:first-child:not(:last-child)
+		{
+	border-top-left-radius: 18px;
+	border-top-right-radius: 18px;	
+		
+		}				
+.btn-group-vertical>.btn:last-child:not(:first-child)
+		{
+	border-bottom-left-radius: 18px;
+	border-bottom-right-radius: 18px;
+		}	
+.btn:hover	{		
+	color: #FFFFFF;
+	background-color: #626262;
+	transition: background-color .1s linear, border-color .1s linear, color .1s linear; 
+    transition-property: background-color, border-color, color;
+    transition-duration: 0.1s, 0.1s, 0.1s;
+    transition-timing-function: linear, linear, linear;
+    transition-delay: initial, initial, initial;
+			}
+.clickable 	{
+		height: 100%;
+		width: 100%;
+		left: 0;
+		top: 0;
+		position: absolute;
+		z-index:1;
+			}
+table.dataTable tr.odd td.leftie,
+table.dataTable tr.even td.leftie
+		{
+		text-align: left;
+		font-family: "GE Sans", "ge-sans", "GE Inspira", "ge-inspira", Helvetica, Arial, sans-serif;
+		font-size: 15px;
+		color: #FFFFFF;
+		}
+table.dataTable tr.odd td.centie,
+table.dataTable tr.even td.centie
+		{
+		text-align: center;
+		font-family: "GE Sans", "ge-sans", "GE Inspira", "ge-inspira", Helvetica, Arial, sans-serif;
+		font-size: 15px;
+		color: #FFFFFF;
+		}
+table.dataTable thead .centie{
+  text-align: center;
+  
+}
+table.dataTable thead th,table.dataTable thead td{
+padding: 8px 18px 18px 10px;
+  border-bottom-color: #FFFFFF;
+  border-bottom:3px solid; 
+   background-color: transparent;
+}			
+table.dataTable thead th,table.dataTable tfoot th
+{
+
+font-weight: normal;
+font-size:25px;
+font-family: "GE Sans", "ge-sans", "GE Inspira", "ge-inspira", Helvetica, Arial, sans-serif;
+color: #FFFFFF;
+}
+
+.selected {
+    color: #FFF;
+	background-color: grey; /* Old browsers */
+  background-image: -webkit-gradient(linear, left top, left bottom, from(grey), to(grey));
+  background-image: -webkit-linear-gradient(top, grey 0%,grey 100%);
+  background-image:      -o-linear-gradient(top, grey 0%, grey 100%);
+  background-image:         linear-gradient(to bottom, grey 0%,grey 100%);
+	
+}
+
+.selected:hover  {
+    color: #FFF;
+}
+.btn-warning {
+    color: #000000;
+    background-color: #ffd900;
+    border-color: transparent;
+}
+.btn-success {
+    color: #000000;
+	}
+.btn-danger {
+    color: #000000;
+	}
+</style>
+</div>  

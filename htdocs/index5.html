@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<audio id="Clicko" src="../CLICK15A.mp3" ></audio>
+<title>Fboro-CCC-PL</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../dist/components/brandkit/favicon/favicon.ico">
+<link href="../../../dist/css/iids1.css" rel="stylesheet" type="text/css">
+<link href="../../../dist/css/responsive.css" rel="stylesheet" type="text/css">
+<link href="../../../CSS/main.css" rel="stylesheet" type="text/css">
+<script src="/../scripts/d3.v4.js" type = "text/javascript"></script>
+<script src="/scripts/jquery-3.1.0.min.js" type = "text/javascript"></script>
+<!--<script src="/../js/CF_G.js" type="text/javascript"></script>-->
+<!--<script src="/../PR.js" type="text/javascript"></script>-->
+    <!--<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../dist/assets/ie10-viewport-bug-workaround.css" rel="stylesheet">
+	 <link rel="import" href="../hard_styles.html">
+	<script type = "text/javascript">
+function DRAF(C,T) 
+{
+var audio = document.getElementById("Clicko");
+       audio.play();
+var Params = pass_Params();
+if (Params[0] == 'undefined' )
+{
+Params[0] = getCookie('plant');
+Params[1] = getCookie('cell');
+}
+if (Params[1] != 'undefined')
+{
+$.ajax({
+	url: 'Write_1_1.php?argument1=' + Params[1] + '&argument2=' + C + '&argument3=' + T + '&argument4=' + Params[0],
+	type: 'POST',
+	success: function (){}
+});
+
+
+
+}
+
+
+var tod = new Date();
+tod.setDate(tod.getDate()-1);
+if (tod.getMonth() == 11) 
+{
+var LastDateinMonth = new Date(tod.getFullYear()+1,tod.getMonth()+1,0)
+}
+else
+{
+var LastDateinMonth = new Date(tod.getFullYear(),tod.getMonth()+1,0)
+}
+var lastDayofMonth = LastDateinMonth.getDate();
+var Params = pass_Params();
+if (Params[0] != 'undefined' )
+{
+write_this_here_Cookie();
+}
+else
+{
+Params[0] = getCookie('plant');
+Params[1] = getCookie('cell');
+find_cookie_Params();
+}
+if (Params.length < 2)
+{
+Params.push('-');
+}
+if (Params[0] == 'undefined')
+{
+Params[0]='-';
+}
+var wid = 30;
+var Plant = Params[0];
+var Work_Center = Params[1];
+console.log('WC = '+Params[1]);
+console.log('Plant = '+Params[0]);
+var section_ID;
+var svgns = "http://www.w3.org/2000/svg";
+var	k,
+	On_sign,
+	Off_sign,
+	x,
+	y;
+	var j;
+var Gr='#00FF00';
+var Ye='#FFFF00';
+var Re='#FF0000';
+var Grey='#DDDDDD';
+var FilCol;
+var FilOp;
+$.ajax({
+
+			type: 'GET',
+            url: 'DateColour_1_3_Arg.php?argument1=' + Params[1] + '&argument2=' + Params[0],
+			dataType: 'json',
+            cache: false,
+            success: function (result) {
+	
+	left_Spot = 25;	
+	var top_Spot = 0;	
+	var wid = 30;
+	var x = left_Spot,
+        y = top_Spot+10;
+// 		good_day
+section_ID = 'svgHome';
+
+	body = d3.select('body')
+	svg = body.select('#'+section_ID)
+	
+for (var i = 0; i <  lastDayofMonth; i++) 	{
+k = Math.floor(i/9)-Math.floor(i/18)-Math.floor(i/27);
+	x = x+wid;
+	FilCol = Grey;
+	FilOp = 0.4;
+	for (j=0; j < result.length; j++) 
+	{
+	Dec = '';
+	 if (Number(result[j].D) === (i+1) && result[j].T === 'Overview') 
+	{
+	Dec = result[j].C;
+	break;
+	}
+	}
+		switch(Dec)
+			{
+			case 'G':
+			FilCol = Gr;
+			FilOp = 1;
+			break;
+			case 'Y':
+			FilCol = Ye;
+			FilOp = 1;
+			break;
+			case 'R':
+			FilCol = Re;
+			FilOp = 1;
+			break;
+			default:
+			FilCol = Grey;
+			FilOp = 1;
+			}
+			
+	var rect = document.createElementNS(svgns, 'rect');
+    rect.setAttributeNS(null, 'x', x);
+    rect.setAttributeNS(null, 'y', y);
+    rect.setAttributeNS(null, 'height', wid);
+    rect.setAttributeNS(null, 'width', wid);
+	rect.setAttributeNS(null, 'rx', '3');
+	rect.setAttributeNS(null, 'ry', '3');
+    rect.setAttributeNS(null, 'fill', FilCol);
+	rect.setAttributeNS(null, 'fill-opacity', FilOp);
+	rect.setAttributeNS(null, 'stroke', '#3d3d3d');
+	rect.setAttributeNS(null, 'stroke-width', '1');
+    document.getElementById(section_ID).appendChild(rect);
+var text = svg.append('text').text(i+1)
+					.attr('x',x+10 - (4.5*k))
+					.attr('y',y+21)
+					.attr('fill','black')
+					.attr('font-family','GE Inspira')
+					.attr('font-size','18px')	
+		
+		
+    
+								}
+
+
+
+}
+	
+    });
+
+}
+
+Date.prototype.getWeek = function (dowOffset) {
+/*getWeek() was developed by Nick Baicoianu at MeanFreePath: http://www.meanfreepath.com */
+
+    dowOffset = typeof(dowOffset) == 'int' ? dowOffset : 0; //default dowOffset to zero
+    var newYear = new Date(this.getFullYear(),0,1);
+    var day = newYear.getDay() - dowOffset; //the day of week the year begins on
+    day = (day >= 0 ? day : day + 7);
+    var daynum = Math.floor((this.getTime() - newYear.getTime() - 
+    (this.getTimezoneOffset()-newYear.getTimezoneOffset())*60000)/86400000) + 1;
+    var weeknum;
+    //if the year starts before the middle of a week
+    if(day < 4) {
+        weeknum = Math.floor((daynum+day-1)/7) + 1;
+        if(weeknum > 52) {
+            nYear = new Date(this.getFullYear() + 1,0,1);
+            nday = nYear.getDay() - dowOffset;
+            nday = nday >= 0 ? nday : nday + 7;
+            /*if the next year starts before the middle of
+              the week, it is week #1 of that year*/
+            weeknum = nday < 4 ? 1 : 53;
+        }
+    }
+    else {
+        weeknum = Math.floor((daynum+day-1)/7);
+    }
+    return weeknum;
+};
+
+</script>
+<script type="text/javascript">
+function Href_Function(arg)
+{
+window.location.href = window.location.href + '&WC='+arg;
+}
+</script>
+
+</head>
+
+<body bgcolor="#000000" style="background-color: #E1E1E1">
+<nav class="navbar navbar-static-top navbar-default" role="navigation">
+<div class="container">
+<div class="navbar-header">
+      <a class="navbar-brand" href="../../index.html"><span class="ge-logo"></span> <span id="tst">CCC Dashboard<small><i>on</i> Predix </small></span></a>
+      <!-- .navbar-toggle for collapsed navbar content -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+</div>
+<link rel="import" href="../CF.html"> 
+<div class="pull-right">
+<div class="btn-toolbar pull-left">
+
+<div class="btn-group">
+          <button id="Tier_Button1" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown"><span id="Tier1"class="user-name">Choose Tier 1</span> <i class="icon-chevron-down"></i></button>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="?plant=6400">Farnborough</a></li>
+            <li><a href="?plant=1400">Lafayette</a></li>
+            <li><a href="?plant=1401">Conroe</a></li>
+          </ul>
+</div>
+<div class="btn-group">		
+
+<button id="Tier_Button2" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown"><span id="Tier2" class="user-name">Choose Tier 2</span> <i class="icon-chevron-down"></i></button>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="#">Choose Tier 1 first</a></li>
+          </ul>
+</div>
+
+</div>
+</div>
+</div>
+<div  style="background-color: dark-grey; width: 100%" class="primary-navbar nav-collapse">
+    <div class="container">
+		
+		<div class="responsive-elements">
+		
+		</div>
+      <ul class="nav navbar-nav">
+
+        <li class="active"><a href="#">Home</a></li>
+
+        <li><a href="/CCC_Ind_SAF_2_7.html">Safety X</a></li>
+        <li><a href="/CCC_Ind_QUA_1_6.html">Quality</a></li>
+		<li><a href="/CCC_Ind_DEL_1_7.html">Delivery</a></li>
+		<li><a href="/CCC_Ind_IMP_1_6.html">Projects</a></li>
+		<li><a href="/CCC_Ind_CAP_3_0.html">Capacity</a></li>
+		<li><a href="/CCC_Ind_LOA_1_6.html">Despatch List</a></li>
+
+
+      </ul>
+
+	</div>
+</div>
+</nav>
+ <script>
+    var link = document.querySelector('link[rel=import]');
+    var content = link.import.querySelector('#st');
+    document.body.appendChild(document.importNode(content, true));
+ </script>
+</body>  
+<div class="container content">
+<div class="row ui-sortable">
+<!--<div class="page-header"> 
+<h1 class="pull-left voice voice-brand">Dashboard</h1>
+</div>-->
+
+<div class="col-sm-12 col-md-12">
+<section class="module actionable draggable" style="height: 130px;  box-shadow: 6px 6px 5px #888888;" >
+
+    
+<header class="module-header" style="height: 1px; ">
+          <h2 class="voice voice-brand pull-left">Did we have a good day?</h2> 
+		  <button type="button" class="btn btn-lg btn-success" style="width: 120px; margin-top: 0px; margin-left: 18px; margin-right: 8px;" onclick="DRAF('G','Overview');">Good</button>
+		<button type="button" class="btn btn-lg btn-warning" style="width: 120px; margin-top: 0px; margin-left: 8px; margin-right: 8px;" onclick ="DRAF('Y','Overview');">Avg</button>
+		<button type="button" class="btn btn-lg btn-danger" style="width: 120px; margin-top: 0px; margin-left: 8px; margin-right: 8px;" onclick ="DRAF('R','Overview');">Bad</button>
+</header>
+<div class="module-body" style="height: 95px;" >
+<svg id="svgHome" xmlns="http://www.w3.org/2000/svg" style = "position: relative; margin-top: 25px;" width="100%" height="70px"> 
+</svg>
+</div>
+</section>
+</div>
+<div class="col-sm-6 col-md-6">
+<section class="module actionable draggable" style=" box-shadow: 6px 6px 5px #888888;" >
+<a href="/../CCC_Ind_SAF_2_7.html"><span class="clickable"></span></a>
+<header class="module-header">
+          <h2 class="voice voice-brand pull-left">Safety X</h2>
+</header>
+<div class="module-body">
+
+<svg id="svgOne" xmlns="http://www.w3.org/2000/svg" style = "position: relative; " width="235px" height="100%"> 
+</svg>
+
+</div>
+<footer class="module-footer"></footer>
+</section>
+</div>
+<!--                               FIRST MODULE END                                -->
+<div class="col-sm-6 col-md-6">
+<section class="module actionable draggable" style=" box-shadow: 6px 6px 5px #888888;" >
+<a href="/../CCC_Ind_QUA_1_6.html"><span class="clickable"></span></a>
+<header class="module-header">
+          <h2 class="voice voice-brand pull-left">Quality Q</h2>
+</header>
+<div class="module-body">
+
+<svg id="svgTwo" xmlns="http://www.w3.org/2000/svg" style = "position: relative;" width="100%" height="100%"> 
+</svg>
+</div>
+
+
+</section>
+</div>
+<!--                               SECOND MODULE END                                -->
+<div class="col-sm-6 col-md-6">
+<section class="module actionable draggable" style=" box-shadow: 6px 6px 5px #888888;" >
+<a href="/../CCC_Ind_DEL_1_7.html"><span class="clickable"></span></a>
+<header class="module-header">
+          <h2 class="voice voice-brand pull-left">Delivery Truck</h2>
+</header>
+<div class="module-body">
+<div id="truck_body" style="position:relative; background-image: url('/../CSS/Picture13.png'); background-repeat: no-repeat; background-position: center; background-size: 94%; height:72%; ">
+<svg id="svgThree" xmlns="http://www.w3.org/2000/svg" style = "position: absolute;" width="100%" height="100%"> 
+</svg>
+</div>
+<div style="position:relative; height:28%;"  >
+ <div class="ge-card" style="box-shadow: none;">
+
+ <div id="car_val" class="ge-card__header" style="position:absolute; left: 30%; width 10%; height: 35px; font-size: 21px; font-family: GE Inspira"></div>
+<div id="car_hed" class="ge-card__header" style="position:absolute; left: 40%; width 20%; height: 35px; font-size: 21px; font-family: GE Inspira"></div>
+
+</div>
+</div>
+
+</div>
+
+
+
+
+</section>
+</div>
+<!--                               THIRD MODULE END                                -->
+
+<div class="col-sm-6 col-md-6">
+<section class="module actionable draggable" style=" box-shadow: 6px 6px 5px #888888;" >
+<a href="/../CCC_Ind_IMP_1_6.html"><span class="clickable"></span></a>
+<header class="module-header">
+          <h2 class="voice voice-brand pull-left">Improvements</h2>
+</header>
+<div class="module-body">
+<div style="position:inline-block; float: left; height: 100%; width: 58%; ">
+<svg id="svgFour" xmlns="http://www.w3.org/2000/svg" style = "float:left; " width="100%" height="100%"> 
+</svg>
+</div>
+<div style="position:inline-block; float:left; height: 100%; width: 38%; " >
+<div class="ge-card" style=" position:absolute; top: 35%; height: 60%; width: 25%; box-shadow: none;" >
+
+<div id="car_Pro" class="ge-card__header" style=" font-size: 22px; border: none; box-shadow: none; ">T</div>
+
+</div>
+</div>
+</section>
+</div>
+<!--                               FOURTH MODULE END                                -->
+
+
+
+</div>
+</div>
+<script src="../../dist/components/bootstrap/js/collapse.js"></script>
+<script src="../../dist/components/bootstrap/js/dropdown.js"></script>
+<script src="../../dist/components/respond/respond.src.js"></script>
+<script type="text/javascript">
+function setCookie(cname, cvalue, dname, dvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "&" + dname + "=" + dvalue + ";" + expires + ";path=/";
+}
+
+function write_this_here_Cookie()
+{
+var Params = pass_Params();
+if (Params[0]!=undefined)
+{
+setCookie('plant', Params[0], 'cell', Params[1],15);
+}
+}
+</script>
+<script type="text/javascript">
+
+function find_Params()
+		{
+
+		var parameters = location.search.substring(1).split("&");
+		var temp;
+		var Tier= [0];
+		var gh;
+for (i=0;i<parameters.length;i++)
+			{
+		temp = parameters[i].split("=");
+		Tier[i] = unescape(temp[1]);
+
+
+		console.log(Tier[i]);
+			}
+	if (Tier[0]>0)
+	{
+	if (document.getElementById('Tier1').innerHTML !="Plant "+Tier[0])
+		{
+	document.getElementById('Tier1').innerHTML = "Plant "+Tier[0];
+	$.ajax({
+			type: 'GET',
+            url: 'Cells_1_0_Arg.php?argument1=' + Tier[0],
+			dataType: 'json',
+            cache: false,
+            success: function (result) 
+				{
+				document.getElementById('Tier2').innerHTML = "Choose the Cell";
+				console.log(document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML);
+				document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML = '';
+				$.each(result, function (i, item) {
+				console.log('WC'+result[i].Cell.substring(0,result[i].Cell.toString().indexOf(' ')));
+				document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML = document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML +
+				'<li><a href="?plant=' +Tier[0]+'&WC='+result[i].Cell+'">'+result[i].Cell +' Cell</a></li>';
+													});
+					if (Tier[1]!=undefined)
+					{
+					document.getElementById('Tier2').innerHTML = "WC "+Tier[1];
+					}
+				}
+	
+			});
+		}
+	else
+		{
+		if (Tier[1]!=undefined)
+			{
+			document.getElementById('Tier2').innerHTML = "WC "+Tier[1];
+			}
+		}
+	}
+	
+		}	
+find_Params();
+</script>
+<script type="text/javascript">
+function pass_Params()
+{
+var parameters = location.search.substring(1).split("&");
+		var temp;
+		var Tier= [0];
+		var gh;
+for (i=0;i<parameters.length;i++)
+			{
+		temp = parameters[i].split("=");
+		Tier[i] = unescape(temp[1]);
+			}
+return Tier;
+}
+
+</script>
+<script type="text/javascript">
+function getCookie(cname) {
+	var end;
+    var name = cname + "=";
+	var ca = document.cookie.split(';expires');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1);
+        }
+		if (c.indexOf('&') > c.indexOf(cname))
+		{
+		end = c.indexOf('&');
+		}
+		else
+		{
+		temp = c.length;
+		temp2 =  c.indexOf(';',c.indexOf(cname));
+		end = Math.max(temp,temp2);
+		
+		}
+		         return c.substring(c.indexOf(name)+name.length,end);
+        
+    }
+    return "";
+	
+}
+
+function find_cookie_Params()
+		{
+
+		var parameters = [getCookie('plant'),getCookie('cell')];
+		var temp;
+		var Tier= [0];
+		var gh;
+		if (parameters[1]!=undefined) 
+				{
+for (i=0;i<parameters.length;i++)
+			{
+		Tier[i] = parameters[i];
+		console.log(Tier[i]);
+			}
+	if (Tier[0]>0)
+	{
+	if (document.getElementById('Tier1').innerHTML !="Plant "+Tier[0])
+		{
+	document.getElementById('Tier1').innerHTML = "Plant "+Tier[0];
+	$.ajax({
+			type: 'GET',
+            url: 'Cells_1_0_Arg.php?argument1=' + Tier[0],
+			dataType: 'json',
+            cache: false,
+            success: function (result) 
+				{
+				document.getElementById('Tier2').innerHTML = "Choose the Cell";
+				console.log(document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML);
+				document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML = '';
+				$.each(result, function (i, item) {
+				console.log(result[i].Cell.substring(0,result[i].Cell.toString().indexOf(' ')));
+				document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML = document.getElementById('Tier_Button2').parentNode.childNodes[3].innerHTML +
+				'<li><a href="?plant=' +Tier[0]+'&WC='+result[i].Cell+'">'+result[i].Cell+' Cell</a></li>';
+													});
+					if (Tier[1]!=undefined)
+					{
+					document.getElementById('Tier2').innerHTML = "WC "+Tier[1];
+					}
+				}
+	
+			});
+		}
+	else
+		{
+		if (Tier[1]!=undefined)
+			{
+			document.getElementById('Tier2').innerHTML = "WC "+ Tier[1];
+			}
+		}
+	}
+	
+				}	
+		}
+
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+
+var tod = new Date();
+tod.setDate(tod.getDate()-1);
+if (tod.getMonth() == 11) 
+{
+var LastDateinMonth = new Date(tod.getFullYear()+1,tod.getMonth()+1,0)
+}
+else
+{
+var LastDateinMonth = new Date(tod.getFullYear(),tod.getMonth()+1,0)
+}
+var lastDayofMonth = LastDateinMonth.getDate();
+var Params = pass_Params();
+if (Params[0] != 'undefined' )
+{
+write_this_here_Cookie();
+}
+else
+{
+Params[0] = getCookie('plant');
+Params[1] = getCookie('cell');
+find_cookie_Params();
+}
+if (Params.length < 2)
+{
+Params.push('-');
+}
+if (Params[0] == 'undefined')
+{
+Params[0]='-';
+}
+var wid = 30;
+var Plant = Params[0];
+var Work_Center = Params[1];
+console.log('WC = '+Params[1]);
+console.log('Plant = '+Params[0]);
+var section_ID;
+var svgns = "http://www.w3.org/2000/svg";
+var	k,
+	On_sign,
+	Off_sign,
+	x,
+	y;
+	var j;
+var Gr='#00FF00';
+var Ye='#FFFF00';
+var Re='#FF0000';
+var Grey='#DDDDDD';
+var FilCol;
+var FilOp;
+$.ajax({
+
+			type: 'GET',
+            url: 'DateColour_1_3_Arg.php?argument1=' + Params[1] + '&argument2=' + Params[0],
+			dataType: 'json',
+            cache: false,
+            success: function (result) {
+	
+	left_Spot = 25;	
+	var top_Spot = 0;	
+	var wid = 30;
+	var x = left_Spot,
+        y = top_Spot+10;
+// 		good_day
+section_ID = 'svgHome';
+
+	body = d3.select('body')
+	svg = body.select('#'+section_ID)
+	
+for (var i = 0; i <  lastDayofMonth; i++) 	{
+k = Math.floor(i/9)-Math.floor(i/18)-Math.floor(i/27);
+	x = x+wid;
+	FilCol = Grey;
+	FilOp = 0.4;
+	for (j=0; j < result.length; j++) 
+	{
+	Dec = '';
+	 if (Number(result[j].D) === (i+1) && result[j].T === 'Overview') 
+	{
+	Dec = result[j].C;
+	break;
+	}
+	}
+		switch(Dec)
+			{
+			case 'G':
+			FilCol = Gr;
+			FilOp = 1;
+			break;
+			case 'Y':
+			FilCol = Ye;
+			FilOp = 1;
+			break;
+			case 'R':
+			FilCol = Re;
+			FilOp = 1;
+			break;
+			default:
+			FilCol = Grey;
+			FilOp = 1;
+			}
+		
+		
+		
+    var rect = document.createElementNS(svgns, 'rect');
+    rect.setAttributeNS(null, 'x', x);
+    rect.setAttributeNS(null, 'y', y);
+    rect.setAttributeNS(null, 'height', wid);
+    rect.setAttributeNS(null, 'width', wid);
+	rect.setAttributeNS(null, 'rx', '3');
+	rect.setAttributeNS(null, 'ry', '3');
+    rect.setAttributeNS(null, 'fill', FilCol);
+	rect.setAttributeNS(null, 'fill-opacity', FilOp);
+	rect.setAttributeNS(null, 'stroke', '#3d3d3d');
+	rect.setAttributeNS(null, 'stroke-width', '1');
+    document.getElementById(section_ID).appendChild(rect);
+var text = svg.append('text').text(i+1)
+					.attr('x',x+10 - (4.5*k))
+					.attr('y',y+21)
+					.attr('fill','black')
+					.attr('font-family','GE Inspira')
+					.attr('font-size','18px')
+								}
+//                    did we have a good day
+	
+	
+	left_Spot = 20;	
+	var top_Spot = 0;	
+	var wid = 90;
+	var x = left_Spot+60,
+        y = top_Spot;
+// 		red cross vertical - Section ID: svgOne
+section_ID = 'svgOne';
+
+    var rect = document.createElementNS(svgns, 'rect');
+    rect.setAttributeNS(null, 'x', x);
+    rect.setAttributeNS(null, 'y', y);
+    rect.setAttributeNS(null, 'height', wid*2.3333);
+    rect.setAttributeNS(null, 'width', wid);
+	rect.setAttributeNS(null, 'rx', '0');
+	rect.setAttributeNS(null, 'ry', '0');
+    rect.setAttributeNS(null, 'fill', '#000000');
+	rect.setAttributeNS(null, 'stroke', '#000000');
+	rect.setAttributeNS(null, 'stroke-width', '1');
+    document.getElementById(section_ID).appendChild(rect);
+
+	
+	
+	var wid = 2.33333*90;
+	var x = left_Spot,
+        y = top_Spot+60;
+// 		red cross horizontal
+    var rect = document.createElementNS(svgns, 'rect');
+    rect.setAttributeNS(null, 'x', x);
+    rect.setAttributeNS(null, 'y', y);
+    rect.setAttributeNS(null, 'height', wid/2.33333);
+    rect.setAttributeNS(null, 'width', wid);
+	rect.setAttributeNS(null, 'rx', '0');
+	rect.setAttributeNS(null, 'ry', '0');
+    rect.setAttributeNS(null, 'fill', '#000000');
+	rect.setAttributeNS(null, 'stroke', '#000000');
+	rect.setAttributeNS(null, 'stroke-width', '1');
+    document.getElementById(section_ID).appendChild(rect);
+	
+// 		day rectangles within red cross	
+ wid = 30
+
+
+	body = d3.select('body')
+	svg = body.select('#'+section_ID)
+	
+	
+   
+var Dec;
+	
+ 	 
+for (var i = 0; i <  lastDayofMonth; i++) 	{
+    wid = 30;
+	k = (i-9);
+	On_sign = Math.floor(i/6)-Math.floor(i/12)-Math.floor(i/18)-Math.floor(i/30)-Math.floor(i/27);
+	Off_sign = Math.floor(i/27);
+	x = left_Spot+60+(i-(6*On_sign) - Math.floor((i - (6*On_sign) )/(3 + (4*(On_sign)))  )*(3 + (4*(On_sign)))) * (wid) - 2*(wid)*On_sign,
+    y = top_Spot + (Math.floor((i - (6*(On_sign)) )/(3 + (4*(On_sign))))+(2*On_sign)-(4*Off_sign) ) * (wid);
+	FilCol = Grey;
+	FilOp = 0.4;
+	for (j=0; j < result.length; j++) 
+	{
+	Dec = '';
+	 if (Number(result[j].D) === (i+1) && result[j].T === 'Safety_Cross') 
+	{
+	Dec = result[j].C;
+	break;
+	}
+	}
+		switch(Dec)
+			{
+			case 'G':
+			FilCol = Gr;
+			FilOp = 1;
+			break;
+			case 'Y':
+			FilCol = Ye;
+			FilOp = 1;
+			break;
+			case 'R':
+			FilCol = Re;
+			FilOp = 1;
+			break;
+			default:
+			FilCol = Grey;
+			FilOp = 1;
+			}
+		
+		
+		
+    var rect = document.createElementNS(svgns, 'rect');
+    rect.setAttributeNS(null, 'x', x);
+    rect.setAttributeNS(null, 'y', y);
+    rect.setAttributeNS(null, 'height', wid);
+    rect.setAttributeNS(null, 'width', wid);
+	rect.setAttributeNS(null, 'rx', '3');
+	rect.setAttributeNS(null, 'ry', '3');
+    rect.setAttributeNS(null, 'fill', FilCol);
+	rect.setAttributeNS(null, 'fill-opacity', FilOp);
+	rect.setAttributeNS(null, 'stroke', '#3d3d3d');
+	rect.setAttributeNS(null, 'stroke-width', '1');
+    document.getElementById(section_ID).appendChild(rect);
+var text = svg.append('text').text(i+1)
+					.attr('x',x+10 - (4.5*(On_sign+Off_sign)))
+					.attr('y',y+21)
+					.attr('fill','black')
+					.attr('font-family','GE Inspira')
+					.attr('font-size','18px')
+								}
+		
+<!--                    SECOND SESSION with Quality Q			-->
+section_ID = 'svgTwo';
+var wid,
+	k,
+	On_sign,
+	Off_sign,
+	x,
+	y;
+
+	body = d3.select('body')
+	svg = body.select('#'+section_ID)
+	
+wid = 220/(8*Math.sqrt(2));	
+var start_spot_left = 210/2+30;
+var y_spot = 5;
+	var fst=Math.sqrt(2*(3*wid)*(3*wid)) - Math.sqrt(2*(3*wid)*(3*wid) - (wid*wid));
+	console.log(fst/wid);
+	var snd=Math.sqrt(2*(3*wid)*(3*wid)) - Math.sqrt(2*(3*wid)*(3*wid) - (4*wid*wid))-fst;
+	console.log(snd/wid);
+	var thd=Math.sqrt(2*(3*wid)*(3*wid)) - Math.sqrt(2*(3*wid)*(3*wid) - (9*wid*wid))-fst-snd;
+	console.log(Math.sqrt(2*(3*wid)*(3*wid))*2+2*wid);
+	
+var x_arr = [wid,wid,wid,wid,thd,snd,fst,0,-fst,-snd,-thd,-wid,-wid,-wid,-wid];	
+var y_arr = [ 0, fst, snd, thd, wid,wid,wid,wid,wid,wid,wid, thd, snd,fst,0]; 
+var x = start_spot_left; 
+var y = y_spot;	
+var inc1;
+var inc2;
+var flor;
+var mod;
+
+for (i = 0; i < lastDayofMonth; i++) {
+flor = Math.floor(i/14) - Math.floor(i/28) 
+mod = (i+1)-Math.floor((i+1)/14)*14
+
+	ord1 = (i+1)-(flor*mod*2);
+	inc1 = x_arr[ord1];
+	ord2 = (i+1)-(flor*mod*2);
+	inc2 = y_arr[ord2] * (1 -(2*(Math.floor((i)/14)-Math.floor((i)/28))));
+	k = (i-8);
+	if (i === 10)
+	{
+	console.log('X:' + x);
+	console.log('Y: ' + y);
+	}
+	if (i === 28)
+	{
+	x = start_spot_left + 2*wid + thd;
+	y = y_spot+6*wid+fst+snd+thd;
+	}
+	if (i === 29)
+	{
+	x = start_spot_left + 4*wid;
+	y = y_spot+7*wid+fst+snd+thd;
+	}
+	if (i === 30)
+	{
+	x = start_spot_left + 5*wid;
+	y = y_spot+7*wid+3*fst+2*snd+thd;
+	}
+	
+	FilCol = Grey;
+		FilOp = 0.4;
+	for (j=0; j < result.length; j++) 
+	{
+	Dec = '';
+	 if (Number(result[j].D) === (i+1) && result[j].T === 'Quality_Q') 
+	{
+	Dec = result[j].C;
+	break;
+	}
+	}
+		switch(Dec)
+			{
+			case 'G':
+			FilCol = Gr;
+			FilOp = 1;
+			break;
+			case 'Y':
+			FilCol = Ye;
+			FilOp = 1;
+			break;
+			case 'R':
+			FilCol = Re;
+			FilOp = 1;
+			break;
+			default:
+			FilCol = Grey;
+			FilOp = 0.6;
+			}
+	
+	
+	
+    var rect = document.createElementNS(svgns, 'rect');
+    rect.setAttributeNS(null, 'x', x);
+    rect.setAttributeNS(null, 'y', y);
+    rect.setAttributeNS(null, 'height', wid);
+    rect.setAttributeNS(null, 'width', wid);
+	rect.setAttributeNS(null, 'rx', wid/9);
+	rect.setAttributeNS(null, 'ry', wid/9);
+    rect.setAttributeNS(null, 'fill', FilCol);
+	rect.setAttributeNS(null, 'fill-opacity', FilOp);
+	rect.setAttributeNS(null, 'stroke', '#3d3d3d');
+	rect.setAttributeNS(null, 'stroke-width', '1');
+    document.getElementById(section_ID).appendChild(rect);
+	var text = svg.append('text').text(i+1)
+					.attr('x',x+wid/3 - (wid/6*(Math.ceil(k/31))))
+					.attr('y',y+0.74*wid)
+					.attr('fill','black')
+					.attr('font-family','GE Inspira')
+					.attr('font-size',(wid/2)+3+'px')
+		x = x + inc1;
+		y = y + inc2;	
+		
+		
+		
+		} 
+   
+// 		day rectangles within delivery truck	
+
+
+section_ID = 'svgThree';
+body = d3.select('body')
+svg = body.select('#'+section_ID)
+var truck_width = body.select('#truck_body')
+console.log('div width:'+ truck_width.style("width"));
+console.log(truck_width.style("width").substr(0,3));
+console.log('div height:'+ truck_width.style("height"));
+console.log('start spot:'+ (0.03+0.247)*Number(truck_width.style("width").substr(0,3)));
+console.log('start spot:'+ 0.277*Number(svg.style("width").substr(0,3)));
+console.log(truck_width.style("height").substr(0,3));
+//wid = Number(truck_width.style("height").substr(0,3))/9.3;
+wid = 	Number(svg.style("width").substr(0,3))/20;
+var start_spot_left = (0.05+0.295)*Number(truck_width.style("width").substr(0,3));
+var y_spot = Number(truck_width.style("height").substr(0,3))/2-2.32*wid;	
+	
+	for (var i = 0; i <  lastDayofMonth; i++) {
+		x = start_spot_left + (i - Math.floor(i/10)*10) * (wid+0.8) + Math.floor(i/30)*10*(wid+0.8),
+        y = y_spot + Math.floor(i/10) * (wid) - Math.floor(i/30)*(wid);
+k = (i-8);
+
+FilCol = Grey;
+		FilOp = 0.4;
+	for (j=0; j < result.length; j++) 
+	{
+	Dec = '';
+	 if (Number(result[j].D) === (i+1) && result[j].T === 'Delivery_Truck') 
+	{
+	Dec = result[j].C;
+	break;
+	}
+	}
+		switch(Dec)
+			{
+			case 'G':
+			FilCol = Gr;
+			FilOp = 1;
+			break;
+			case 'Y':
+			FilCol = Ye;
+			FilOp = 1;
+			break;
+			case 'R':
+			FilCol = Re;
+			FilOp = 1;
+			break;
+			default:
+			FilCol = Grey;
+			FilOp = 1;
+			}
+	
+
+
+    var rect = document.createElementNS(svgns, 'rect');
+    rect.setAttributeNS(null, 'x', x);
+    rect.setAttributeNS(null, 'y', y);
+    rect.setAttributeNS(null, 'height', wid);
+    rect.setAttributeNS(null, 'width', wid);
+	rect.setAttributeNS(null, 'rx', wid/20);
+	rect.setAttributeNS(null, 'ry', wid/20);
+    rect.setAttributeNS(null, 'fill', FilCol);
+	rect.setAttributeNS(null, 'fill-opacity', FilOp);
+	rect.setAttributeNS(null, 'stroke', '#3d3d3d');
+	rect.setAttributeNS(null, 'stroke-width', '1');
+    document.getElementById(section_ID).appendChild(rect);
+	var text = svg.append('text').text(i+1)
+					.attr('x',x+wid/3 - (wid/6*(Math.ceil(k/31))))
+					.attr('y',y+0.74*wid)
+					.attr('fill','black')
+					.attr('font-family','GE Inspira')
+					.attr('font-size',(wid/2)+3+'px')
+		}
+		
+section_ID = 'svgFour';
+body = d3.select('body')
+svg = body.select('#'+section_ID)		
+		wid = 210/8;
+		x_start = Number(svg.style("width").substr(0,3))/3-3*wid;
+		y_start = 5;
+		
+		for (var i = 0; i <  lastDayofMonth; i++) {
+    
+	var Signal = Math.floor(i/10) - Math.floor(i/20) - Math.floor(i/30) - Math.floor(i/22);
+	var Aft_Sign = Math.floor(i/22);
+	var 	x = x_start + ((i- (9*Signal)-(Aft_Sign*2)) - Math.floor((i- (10*Signal)-(Aft_Sign*2))/(5 - (2*Signal)))*(5-(2*Signal))) * wid;
+			y = y_start + Math.floor( (i - (4*Signal)-(Aft_Sign*2)) /(5 - (2*Signal))) * wid + Aft_Sign*2*wid;
+			
+k = (i-8);
+
+FilCol = Grey;
+FilOp = 0.8;
+	for (j=0; j < result.length; j++) 
+	{
+	Dec = '';
+	 if (Number(result[j].D) === (i+1) && result[j].T === 'Improvements') 
+	{
+	Dec = result[j].C;
+	break;
+	}
+	}
+		switch(Dec)
+			{
+			case 'G':
+			FilCol = Gr;
+			FilOp = 1;
+			break;
+			case 'Y':
+			FilCol = Ye;
+			FilOp = 1;
+			break;
+			case 'R':
+			FilCol = Re;
+			FilOp = 1;
+			break;
+			default:
+			FilCol = Grey;
+			FilOp = 0.6;
+			}
+
+
+    var rect = document.createElementNS(svgns, 'rect');
+    rect.setAttributeNS(null, 'x', x);
+    rect.setAttributeNS(null, 'y', y);
+    rect.setAttributeNS(null, 'height', wid);
+    rect.setAttributeNS(null, 'width', wid);
+	rect.setAttributeNS(null, 'rx', wid/8);
+	rect.setAttributeNS(null, 'ry', wid/8);
+    rect.setAttributeNS(null, 'fill', FilCol);
+	rect.setAttributeNS(null, 'fill-opacity', FilOp);
+	rect.setAttributeNS(null, 'stroke', '#3d3d3d');
+	rect.setAttributeNS(null, 'stroke-width', '1');
+    document.getElementById(section_ID).appendChild(rect);
+	var text = svg.append('text').text(i+1)
+					.attr('x',x+wid/3 - (wid/6*(Math.ceil(k/31))))
+					.attr('y',y+0.74*wid)
+					.attr('fill','black')
+					.attr('font-family','GE Inspira')
+					.attr('font-size',(wid/2)+3+'px')
+		}
+		
+    //    }, function(){
+     //   $(this).css("fill", "white");
+	//	$(this).html(orig_text);
+	}
+	
+    });
+	document.getElementById('car_Pro').innerHTML = 'Projects </br> Completed: </br>';
+	$.ajax({
+			type: 'GET',
+            url: 'CCC_Ind_Cell_PRJ.php?argument1=' + Params[1] + '&argument2=' + Params[0],
+			dataType: 'json',
+            cache: false,
+            success: function (result) 
+				{
+				document.getElementById('car_Pro').innerHTML = '';
+				$.each(result, function (i, item) {
+				document.getElementById('car_Pro').innerHTML = 'Projects </br> Completed: </br>' + (result[i].OTD * 100);
+													});
+				}
+	
+			});
+			d = new Date();
+			d.setDate(d.getDate() - 8);
+			var fw = d.getWeek().toString();
+			if (fw.length === 1)
+			{
+			fw = '0'+fw;
+			}
+			
+	$.ajax({
+			type: 'GET',
+            url: 'CCC_Ind_Cell_OTD_1_1.php?argument1=' + Params[1] + '&argument2=' + Params[0],
+			dataType: 'json',
+            cache: false,
+            success: function (result) 
+				{
+				
+				$.each(result, function (i, item) {
+				document.getElementById('car_val').innerHTML =  ((result[i].OT/result[i].CNT )* 100).toString().substring(0, 4) +'% <br />' +  result[i].OT + ' <br /> '  + result[i].LT;
+				document.getElementById('car_hed').innerHTML = 'OTD FW' + fw +' <br /> Lines On Time <br /> Lines Late \t\t';
+													});
+				}
+	
+			});
+	
+	});
+
+</script>
+<script id="__bs_script__">//<![CDATA[
+    document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.13'><\/script>".replace("HOST", location.hostname));
+//]]></script>
+</body>
+
+</html>
